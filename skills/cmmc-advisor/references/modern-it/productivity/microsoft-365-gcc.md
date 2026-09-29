@@ -1,5 +1,16 @@
 # Microsoft 365 GCC and GCC High Compliance
 
+> **Review required (2026-09-29):** This file contains April 2026 tier,
+> impact-level, service, and package claims that have not all been revalidated.
+> Microsoft's current [cloud integration description](https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability)
+> says Office 365 GCC supports FedRAMP High and pairs with Entra ID in Azure;
+> GCC High pairs with Entra ID in Azure Government. Its [GCC High and DoD
+> description](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/gcc-high-and-dod)
+> describes GCC High as able to demonstrate IL4 equivalency or CMMC inheritance,
+> and Office 365 DoD as DoD SRG IL5 certified. Do not copy the old GCC Moderate
+> or GCC High IL5 statements below into an SSP. Verify the exact service and
+> package authorization and contractual requirement first.
+
 > Source: NIST SP 800-171 Rev 2; CMMC Assessment Guide Level 2 (DoD
 > CIO); DFARS 252.204-7012; FedRAMP Marketplace
 > (marketplace.fedramp.gov) including the Microsoft Office 365
@@ -25,14 +36,11 @@ Microsoft 365 government tenancies serve distinct audiences:
 - **Commercial.** Public-sector and private-sector workloads;
   FedRAMP Moderate on specific services; DoD IL2 for non-CUI
   federal. Not appropriate for CUI under DFARS 7012.
-- **GCC (Government Community Cloud).** Federal agencies and
-  contractors handling public-sector workloads up to FedRAMP
-  Moderate and DoD IL2. CUI posture is limited; contract clauses
-  may allow GCC for specific CUI scenarios with agency
-  agreement, but GCC High is the common contractor path for
-  DFARS-scope CUI.
+- **GCC (Government Community Cloud).** Microsoft describes Office 365 GCC
+  as supporting FedRAMP High; its identity pairing is with Entra ID in Azure.
+  Confirm the exact service authorization and contract conditions for CUI.
 - **GCC High (Government Community Cloud High).** Defense
-  contractors, IL4 and IL5 workloads, DFARS 7012 CUI handling,
+  contractors, IL4-equivalent workloads, DFARS 7012 CUI handling,
   ITAR-controlled environments. Sovereign tenancy physically
   and logically separate from commercial Microsoft 365.
 - **DoD.** Department of Defense mission-owner workloads.
@@ -50,26 +58,14 @@ the FedRAMP-to-IL crosswalk under CSP SRG v1r1, and
 the Azure IaaS and platform services that M365 GCC High runs
 on top of.
 
-**FedRAMP authorization summary (verified 2026-04-21).**
-Microsoft Office 365 GCC High holds a FedRAMP High JAB
-Provisional Authority to Operate under the Microsoft Office
-365 GCC High package (MSO365MT on
-marketplace.fedramp.gov/products/MSO365MT). Microsoft Office
-365 GCC holds a separate FedRAMP Moderate authorization.
-Microsoft Office 365 Commercial holds a FedRAMP High P-ATO on
-specific services. Per-service authorization (which specific
-Office 365 workloads are in FedRAMP scope within each tenancy)
-is enumerated on the FedRAMP Marketplace package pages; verify
-at marketplace.fedramp.gov before citing specific package
-identifiers in an SSP.
-
-**DoD Impact Level coverage (verified 2026-04-21).** Microsoft
-365 GCC holds DoD IL2 Provisional Authorization. Microsoft 365
-GCC High holds DoD IL2, IL4, and IL5 Provisional Authorizations
-under CSP SRG v1r1 reciprocity rules: IL5 on FedRAMP High
-baseline plus CNSSI 1253 High Confidentiality and Integrity
-overlays. Microsoft 365 DoD (the DoD-exclusive tenancy) holds
-IL5 under separate provisional authorization.
+**Current tier summary (reviewed 2026-09-29).** Microsoft describes Office
+365 GCC as supporting FedRAMP High. Its GCC High service description says it
+can demonstrate IL4 equivalency or CMMC inheritance, while Office 365 DoD is
+DoD SRG IL5 certified. These are vendor descriptions, not a blanket approval
+of every service, feature, or contractor workload. Check the FedRAMP Marketplace
+package record and contractual requirements before putting an authorization
+claim or package identifier in an SSP. Sources: [Microsoft cloud integration](https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability),
+[Microsoft GCC High and DoD](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/gcc-high-and-dod).
 
 ---
 

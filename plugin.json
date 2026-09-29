@@ -1,0 +1,6 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "cmmc-advisor",
+  "version": "1.0.0",
+  "description": "Public-source CMMC 2.0 guidance for defense contractors"
+}

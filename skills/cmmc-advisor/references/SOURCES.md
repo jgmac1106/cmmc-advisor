@@ -398,6 +398,17 @@ compliance documentation and practitioner publications.
 
 ## How to Verify Sources
 
+### Targeted September 2026 updates
+
+- [Microsoft cloud feature availability](https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability), accessed 2026-09-29: Office 365 GCC FedRAMP High support and Entra ID cloud pairings.
+- [Microsoft GCC High and DoD service descriptions](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/gcc-high-and-dod), accessed 2026-09-29: GCC High IL4 equivalency / CMMC inheritance and Office 365 DoD IL5 description.
+- [GitHub FedRAMP-compliant models for Copilot](https://docs.github.com/en/copilot/concepts/enterprise/fedramp-models), accessed 2026-09-29: US data residency model policy and default-off setting.
+- [AWS Bedrock model certification matrix](https://aws.amazon.com/compliance/services-in-scope/FedRAMP/amazon-bedrock-models/), accessed 2026-09-29: per-model and per-region status.
+- [DFARS 204.75](https://www.acquisition.gov/dfars/subpart-204.75-cybersecurity-maturity-model-certification), [252.204-7021](https://www.acquisition.gov/dfars/252.204-7021-contractor-compliance-cybersecurity-maturity-model-certification-level-requirements.), and [252.204-7012](https://www.acquisition.gov/dfars/252.204-7012-safeguarding-covered-defense-information-and-cyber-incident-reporting.), accessed 2026-09-29: contract-specific CMMC requirements and safeguarding clause.
+
+The targeted review log is in `evals/CLAIM_AUDIT.md` at the repository root;
+other dated claims have not been revalidated by this update.
+
 1. **NIST publications:** All NIST SPs are freely available at https://csrc.nist.gov
 2. **Federal Register:** Rules and regulations at https://www.federalregister.gov
 3. **CMMC program:** Official DoD page at https://dodcio.defense.gov/CMMC/

@@ -1,5 +1,14 @@
 # AI Developer Tools Compliance
 
+> **Review required (2026-09-29):** Product, routing, and authorization
+> statements below are an April 2026 snapshot. GitHub now documents a
+> [FedRAMP-model restriction policy for Copilot](https://docs.github.com/en/copilot/concepts/enterprise/fedramp-models)
+> for Enterprise Cloud with US data residency; it is disabled by default.
+> Do not assume a fixed Azure OpenAI Government backend or that source code
+> containing CUI is covered. Verify the tool's prompt, workspace, telemetry,
+> model, and regional path and the contract before using any CUI. Other
+> vendor claims in this file remain unverified.
+
 > Source: NIST SP 800-171 Rev 2; CMMC Assessment Guide Level 2
 > (DoD CIO); DFARS 252.204-7012; Anthropic Claude Code
 > documentation (code.claude.com/docs); GitHub Copilot FedRAMP
@@ -28,10 +37,9 @@ Five tools in scope per hub Decision 7:
   backend: direct Anthropic API, Amazon Bedrock (including
   GovCloud), or Google Vertex AI. Dev-tool CUI boundary depends
   on which backend the contractor configures.
-- **GitHub Copilot Enterprise** (Microsoft/GitHub). IDE
-  assistant. Rides on GitHub Enterprise Cloud authorization
-  (FedRAMP Tailored) with Azure OpenAI Government as the
-  federal-customer model backend option.
+- **GitHub Copilot Enterprise** (Microsoft/GitHub). IDE assistant.
+  GitHub documents a US-data-residency FedRAMP-model policy. Check
+  current model availability, feature scope, and the complete data path.
 - **Cursor** (Anysphere). IDE (VS Code fork) with server-side
   prompt building. SOC 2 Type II, not FedRAMP-authorized. Cannot
   direct-route to enterprise backends; Cursor's servers are

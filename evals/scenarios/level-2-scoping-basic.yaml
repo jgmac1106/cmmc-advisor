@@ -27,10 +27,12 @@ required_terms:
 factual_claims_expected: true
 
 expected_recommendation: |
-  Level 2 with C3PAO third-party assessment (because the contractor is
-  processing CUI and the DFARS clause is in the PWS, which triggers Level 2
-  at minimum; self-assessment is not acceptable for CUI-processing
-  contractors under the CMMC 2.0 final rule).
+  The described CUI processing points toward Level 2, but the quoted DFARS
+  252.204-7012 language alone does not establish a CMMC Level 2 C3PAO
+  assessment rather than a Level 2 self-assessment. Check the solicitation
+  and contract for the applicable CMMC clause, level, assessment type, and
+  timing; confirm with the contracting officer if missing. Explain the
+  distinction instead of declaring a C3PAO requirement from CUI alone.
 
   Scope should include the SaaS platform itself (application, data stores,
   admin plane), the GovCloud environment configuration, any endpoint that
@@ -40,8 +42,10 @@ expected_recommendation: |
   boundary in the System Security Plan.
 
 evaluator_notes: |
-  The answer should lead with Level 2 / C3PAO and cite DFARS 252.204-7012
-  as the trigger. CUI scoping answer should explicitly address the enclave
-  model (separate CUI plane from corporate IT). Enabler posture required:
-  the answer must tell the contractor what to DO next (pick a C3PAO, draft
-  an SSP with a clear boundary diagram), not just what the rules say.
+  Reward a conditional Level 2 recommendation and an explicit request for
+  the contract's CMMC level and assessment type. Do not award a claim that
+  DFARS 252.204-7012 or CUI alone mandates C3PAO. The scope should cover
+  CUI assets and connected security protection assets; corporate IT is
+  outside only when its data flows and connections support that boundary.
+  Recommend an SSP with boundary and data-flow diagrams, then arrange the
+  assessment path specified by the contract.

@@ -30,9 +30,10 @@ forward" is always better than "no."
 
 ## Knowledge Base Routing
 
-Your expertise lives in `references/`. Route questions to the correct file
-before answering. Always read the referenced file first. Do not answer
-from memory alone when a reference exists.
+Your expertise lives in `references/` next to this `SKILL.md`. Route questions
+to the correct file before answering. Always read the referenced file first.
+Do not answer from memory alone when a reference exists. Consult
+`references/SOURCES.md` for the provenance list.
 
 | Question Type | Read First |
 |---------------|------------|
@@ -45,7 +46,7 @@ from memory alone when a reference exists.
 | NIST 800-171 Rev 3 transition timeline | `references/rev3-transition.md` |
 | FedRAMP vs CMMC, 7012 CSP requirements | `references/fedramp-gap.md` |
 | Common mistakes, compliance theater | `references/anti-patterns.md` |
-| Specific domain practices (AC, IA, SC, etc.) | `references/domains/{domain}.md` |
+| Specific domain practices (AC, IA, SC, etc.) | Find the matching domain prefix in `references/domains/` (for example, AC is `references/domains/ac-access-control.md`) |
 | AWS GovCloud compliance | `references/modern-it/cloud-platforms/aws-govcloud.md` |
 | Azure Government compliance | `references/modern-it/cloud-platforms/azure-government.md` |
 | GCP Assured Workloads compliance | `references/modern-it/cloud-platforms/gcp-assured.md` |
@@ -134,6 +135,15 @@ Different organizations face different realities. Adapt your guidance:
   multi-enclave architectures, and enterprise compliance management.
 
 ## Disclaimer
+
+Before using product, model, region, FedRAMP, or DoD impact-level claims in
+an SSP or procurement decision, recheck the exact service and feature in the
+current primary provider documentation and FedRAMP Marketplace or DoD
+authorization record. Record the source URL and access date. Dated claims in
+the references are historical snapshots, not present authorization evidence.
+If current status cannot be established, mark it unverified and ask for the
+contract's data category, clauses, assessment requirement, and agency-specific
+conditions. Do not infer a CMMC assessment type from DFARS 252.204-7012 alone.
 
 This skill provides compliance guidance derived from publicly
 available NIST and DoD documentation. It is not legal advice, it

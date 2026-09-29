@@ -309,15 +309,17 @@ requires a deliberate decision, not an author's judgment call.
 
 ## Tier-level authorization snapshot
 
-All claims below verified 2026-04-21 via FedRAMP Marketplace
-and vendor compliance pages. Per-service authorization detail
-lives in the per-vendor files; this snapshot is tier-level only.
+Historical April 2026 snapshot; do not cite this table as current
+authorization evidence in an SSP. Microsoft's current documentation
+contradicts the GCC Moderate and GCC High IL5 entries below. See the
+2026-09-29 note in `microsoft-365-gcc.md`. Recheck every other entry at
+the primary provider source and current authorization record.
 
 | Vendor / tenancy | FedRAMP tier | DoD IL | CUI suitability |
 |---|---|---|---|
 | Microsoft 365 Commercial | FedRAMP High (on specific services) | IL2 | Non-CUI federal; not appropriate for CUI |
-| Microsoft 365 GCC | FedRAMP Moderate | IL2 | Limited CUI scenarios with agency agreement |
-| Microsoft 365 GCC High | FedRAMP High | IL5 | Appropriate for CUI under DFARS 7012 |
+| Microsoft 365 GCC | FedRAMP High support per Microsoft | Verify exact service | Depends on service scope and contract |
+| Microsoft 365 GCC High | High categorization per Microsoft | IL4 equivalency / CMMC inheritance per Microsoft | Depends on service scope and contract |
 | Microsoft 365 DoD | FedRAMP High | IL5 (DoD-exclusive) | DoD mission owners only |
 | Google Workspace (Enterprise Plus) | FedRAMP High (on specific services) | n/a directly | Use Assured Controls Plus for CUI |
 | Google Workspace + Assured Controls Plus | FedRAMP High services + overlay | IL4-aligned | Appropriate for CUI under DFARS 7012 |
@@ -335,7 +337,8 @@ services are in scope at IL5 versus which are GCC-only, which
 Workspace services are covered under Assured Controls Plus,
 which Atlassian apps are in Government Cloud versus Data Center
 only). A contractor building an SSP cites the per-vendor file's
-dated per-service claims, not this snapshot.
+claims only after independently checking the current provider and
+authorization record, not this snapshot.
 
 **GitHub Tailored note.** FedRAMP Tailored is a distinct baseline
 from FedRAMP Low, Moderate, and High. It was designed for

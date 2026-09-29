@@ -1,6 +1,6 @@
 # CMMC Advisor
 
-A Claude Code skill for working through CMMC 2.0 (Cybersecurity Maturity Model Certification) compliance. Built for defense contractors who deliver services to the U.S. Government and need clear, actionable guidance on cybersecurity certification requirements.
+A ChatGPT and Codex skill for working through CMMC 2.0 (Cybersecurity Maturity Model Certification) compliance. Built for defense contractors who deliver services to the U.S. Government and need clear, actionable guidance on cybersecurity certification requirements.
 
 ## Philosophy
 
@@ -29,20 +29,19 @@ Anti-patterns catalog: sixteen named compliance-theater patterns across document
 
 ## Installation
 
-Clone the repository, then copy the skill into your Claude Code skills directory.
+This repository is a skills-only OpenAI plugin. The portable manifest is `plugin.json`; the complete skill, including its references and license, is under `skills/cmmc-advisor/`. There is no MCP server or credential requirement.
+
+For ChatGPT on the web, install the plugin after it has been packaged and made available through the ChatGPT Plugins Directory. A repository clone by itself does not install a skill into ChatGPT on the web. Plugin authors can use the [OpenAI plugin packaging guide](https://developers.openai.com/plugins/build/plugins) and [submission guide](https://developers.openai.com/plugins/deploy/submission) to test and distribute it.
+
+For local Codex use, clone this repository and copy the skill folder to your personal skills directory:
 
 ```bash
 git clone https://github.com/LV-262/cmmc-advisor.git
-# or via SSH: git clone git@github.com:LV-262/cmmc-advisor.git
-
-# Personal installation (available to all your projects)
-cp -r cmmc-advisor ~/.claude/skills/cmmc-advisor
-
-# Project installation (scoped to the current project)
-cp -r cmmc-advisor .claude/skills/cmmc-advisor
+mkdir -p ~/.agents/skills
+cp -R cmmc-advisor/skills/cmmc-advisor ~/.agents/skills/cmmc-advisor
 ```
 
-Claude Code automatically discovers and loads skills from these locations.
+For a project-scoped Codex skill, copy that same folder to `<project>/.agents/skills/cmmc-advisor`. The `references/` directory and its `SOURCES.md` must remain next to `SKILL.md`.
 
 ## Usage Examples
 
@@ -60,7 +59,7 @@ Claude Code automatically discovers and loads skills from these locations.
 
 ## Sources
 
-Every factual claim in this skill traces to a publicly available source. See [SOURCES.md](SOURCES.md) for the complete provenance list.
+Every factual claim in this skill traces to a publicly available source. See [SOURCES.md](skills/cmmc-advisor/references/SOURCES.md) for the complete provenance list.
 
 Primary sources include:
 - NIST SP 800-171 Revision 2 and SP 800-171A (Assessment Procedures)
@@ -74,6 +73,29 @@ Primary sources include:
 - Vendor trust centers for each named product
 
 Compliance facts that depend on current authorization state (per-service FedRAMP status, per-model availability, vendor product scope) carry dated verification stamps inline, typically "verified 2026-04-21 via [URL]." Re-verify at the primary source before citing in an SSP.
+
+The [September 2026 targeted claim review](evals/CLAIM_AUDIT.md) identifies contradicted Microsoft tenancy assertions and outdated AI-tool grading assumptions. It does not validate the entire corpus.
+
+## Evaluations
+
+The runner packages the actual `skills/cmmc-advisor/` folder as an inline ZIP,
+mounts it in a fresh OpenAI hosted shell container for each scenario, and
+requires evidence that the model read `SKILL.md` before scoring its answer.
+This exercises the distributed skill in the OpenAI skill runtime. After the
+plugin is available in ChatGPT, also test it in a new ChatGPT conversation.
+The subject has web search available for current primary-source checks.
+
+```bash
+pip install -r evals/runner/requirements.txt
+python -m unittest evals.runner.test_runner
+python -m evals.runner.runner evals/scenarios --dry-run
+OPENAI_API_KEY=your_key python -m evals.runner.runner evals/scenarios
+```
+
+`--dry-run` validates scenarios and ZIP layout without API calls. Live runs
+require an API key, create one hosted container per scenario, and save graded
+JSON results in `evals/results/`. Review the current source evidence yourself
+before using any answer in an SSP.
 
 ## Contributing
 

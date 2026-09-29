@@ -26,7 +26,7 @@ or paraphrase content from:
 
 The test: if a contributor's employer or a past engagement is the
 only place they could have seen the content, it does not belong here.
-Public sources only, attributed in SOURCES.md.
+Public sources only, attributed in `skills/cmmc-advisor/references/SOURCES.md`.
 
 Practitioner knowledge derived from applying public standards to
 private work is welcome. A contributor who has implemented NIST SP
@@ -60,7 +60,7 @@ depends on current authorization state:
 When adding or modifying content:
 
 1. Cite the specific source document (title, publisher, URL)
-2. Add the source to `SOURCES.md` if it is not already listed
+2. Add the source to `skills/cmmc-advisor/references/SOURCES.md` if it is not already listed
 3. Include the access date for web sources
 4. If citing a specific section, reference the section number or page
 
@@ -137,7 +137,7 @@ macOS, remote work, or other modern technology stacks.
 
 1. **Fork the repository** and create a feature branch.
 2. **Make your changes** following the content standards above.
-3. **Update SOURCES.md** with any new sources you referenced.
+3. **Update `skills/cmmc-advisor/references/SOURCES.md`** with any new sources you referenced.
 4. **Submit a pull request** with:
    - A clear description of what you added or changed
    - Which source documents support the changes

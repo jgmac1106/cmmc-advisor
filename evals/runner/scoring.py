@@ -1,30 +1,11 @@
-"""Evaluator-as-judge scoring for cmmc-advisor responses.
-
-Takes the scenario, the subject response, the rubric markdown, and the
-precheck findings. Constructs a grader prompt, invokes Claude as the
-evaluator, and parses a JSON score object back.
-
-Kept intentionally thin. The rubric itself carries the domain judgment;
-this file just orchestrates the evaluator call and parses the result.
-"""
+"""Rubric scoring through the OpenAI Responses API."""
 
 from __future__ import annotations
 
 import json
-import re
 import sys
 from dataclasses import dataclass
 from typing import Any
-
-try:
-    from claude_agent_sdk import query, ClaudeAgentOptions, AssistantMessage, TextBlock
-    SDK_AVAILABLE = True
-except ImportError:
-    SDK_AVAILABLE = False
-
-
-EVALUATOR_MODEL = "claude-sonnet-4-6"
-
 
 @dataclass(frozen=True)
 class ScoreResult:
@@ -110,21 +91,6 @@ def _extract_json(text: str) -> dict | None:
     return None
 
 
-async def _call_evaluator(prompt: str) -> str:
-    if not SDK_AVAILABLE:
-        raise RuntimeError(
-            "claude-agent-sdk not installed. Run pip install -r requirements.txt"
-        )
-    options = ClaudeAgentOptions(model=EVALUATOR_MODEL, system_prompt="")
-    chunks: list[str] = []
-    async for msg in query(prompt=prompt, options=options):
-        if isinstance(msg, AssistantMessage):
-            for block in msg.content:
-                if isinstance(block, TextBlock):
-                    chunks.append(block.text)
-    return "".join(chunks)
-
-
 def _compute_weighted(scores: dict[str, dict[str, Any]]) -> float:
     weights = {
         "A_accuracy": 2.0,
@@ -143,14 +109,16 @@ def _compute_weighted(scores: dict[str, dict[str, Any]]) -> float:
     return acc / total if total else 0.0
 
 
-async def score_response(
+def score_response(
+    client,
     scenario: dict,
     response: str,
     rubric_text: str,
     precheck: dict,
+    evaluator_model: str,
 ) -> ScoreResult:
     prompt = _build_prompt(scenario, response, rubric_text, precheck)
-    raw = await _call_evaluator(prompt)
+    raw = client.responses.create(model=evaluator_model, input=prompt).output_text
     parsed = _extract_json(raw) or {}
     scores = parsed.get("scores", {})
     hard_fail = parsed.get("hard_fail_flag")
