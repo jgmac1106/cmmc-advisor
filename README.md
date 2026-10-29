@@ -115,6 +115,6 @@ This skill provides compliance guidance based on publicly available documentatio
 
 ## License
 
-Released under the [MIT License](LICENSE). Copyright (c) 2026 Lloyd Evans.
+Released under the [MIT License](LICENSE). Copyright (c) 2026 J. Gregory Mcverry as a fork of Copyright (c) 2026 Lloyd Evans.
 
 Free to use, modify, and redistribute, including commercially. If you fork, adapt, or build on this skill, keep the copyright notice and license text intact. Attribution in a visible place (README, about page, skill frontmatter) is appreciated but not legally required beyond what the license specifies.
