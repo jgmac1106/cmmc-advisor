@@ -283,3 +283,8 @@ Several approaches exist for maintaining your SSP:
 Choose the approach that matches your organization's size, budget, and
 technical capability. A well-maintained Word document beats a neglected
 GRC platform.
+
+
+## Traceability matrix relationship
+
+Use `traceability-matrix.md` when mapping individual assessment objectives to documentary and operational evidence. The canonical SSP is authoritative for organization-specific implementation statements; the traceability matrix is the evidence crosswalk; the gap analysis records assessment findings; and the POA&M tracks remediation. A change to a plan triggers an objective-level impact review, not an automatic rewrite of the SSP or an automatic MET determination. Preserve source versions and propose changes for review.
