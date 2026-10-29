@@ -43,6 +43,14 @@ expected_recommendation: |
 evaluator_notes: |
   Reward contract and data-flow discovery, current per-service authorization
   verification, and a practical migration inventory. Penalize the old
-  blanket GCC Moderate / GCC High IL5 equivalence. A named Microsoft source
-  and access date are desirable for SSP-facing assertions. Do not treat the
-  old reference snapshot as current proof.
+  blanket GCC Moderate-only / GCC High IL5 claims. Require named primary
+  sources and access dates for current assertions. In the 2026-10-29 review,
+  GCC MSO365MT showed Class C (Moderate), Agency path, while Microsoft described
+  High support. GCC High FR1824057433 showed Class D (High), Agency path.
+  Preserve the vendor/government distinction; do not mislabel either package
+  or claim a JAB P-ATO for GCC High. Recheck later evidence rather than freeze
+  these observations as permanent truth. Do not treat the snapshot as current proof.
+  A recommendation omitting contract-specific or service-specific authorization
+  checks fails Accuracy (0), even if it happens to name a suitable tenancy.
+  Separately scoped Azure services do not authorize Commercial M365 productivity.
+  Commercial can remain for non-CUI workflows if the actual contract permits.

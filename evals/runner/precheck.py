@@ -42,6 +42,29 @@ CITATION_MARKERS = [
 ]
 CITATION_RE = re.compile("|".join(CITATION_MARKERS), re.IGNORECASE)
 
+# Narrow regression signatures, not a general authorization fact checker.
+# The semantic evaluator must inspect quotations, negation, source attribution,
+# and newer evidence before treating any candidate as an accuracy failure.
+M365_CLASSIFICATION_PATTERNS = {
+    "gcc_blanket_moderate": r"\bGCC(?:\s+is|\s+holds|\s+tenancy(?:\s+variant)?(?:\s+authorized)?\s+at)?\s+(?:only\s+|categorically\s+)?FedRAMP\s+Moderate\b",
+    "gcc_high_blanket_il5": r"\bGCC\s+High\s+(?:is|holds|carries|inherits|has|is\s+authorized\s+at)\s+(?:(?:a|an)\s+)?(?:FedRAMP\s+High\s+(?:plus|\+)\s+)?(?:DoD\s+)?IL5\b",
+    "gcc_high_jab": r"\bGCC\s+High\s+(?:(?:holds|has)\s+(?:a\s+)?)?(?:FedRAMP\s+High\s+)?JAB\s+P-ATO\b",
+    "gcc_high_wrong_package": r"\bGCC\s+High\s+(?:package\s*(?:is|ID|identifier)?\s*[:=]?\s*|under\s+package\s+)\(?MSO365MT\b",
+    "il5_default_gcc_high": r"\bIL5\b[^.!?]{0,100}\b(?:requires|must\s+choose|use)\s+(?:Microsoft\s+365\s+|M365\s+)?GCC\s+High\b",
+}
+
+
+def m365_classification_candidates(text: str) -> list[str]:
+    """Flag familiar obsolete wording, including wrapped Markdown and tables.
+
+    Candidates are advisory: correctly rejecting or quoting a claim may match.
+    This deliberately does not suppress an entire paragraph on 'not', which
+    could hide a separate affirmative error. Scenario rubrics handle meaning.
+    """
+    normalized = re.sub(r"\s+", " ", re.sub(r"[*_`]", "", text))
+    return [name for name, pattern in M365_CLASSIFICATION_PATTERNS.items()
+            if re.search(pattern, normalized, re.IGNORECASE)]
+
 
 def _strip_code_fences(text: str) -> str:
     lines = text.split("\n")
@@ -91,5 +114,6 @@ def run_precheck(response: str, scenario: dict) -> dict:
         "teacher_phrases": teacher,
         "missing_required_terms": missing_required,
         "citation_ok": citation_ok,
+        "m365_classification_candidates": m365_classification_candidates(prose),
         "hard_fail_flags": hard_fail_flags,
     }

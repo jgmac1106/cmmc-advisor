@@ -1,25 +1,9 @@
 # Microsoft 365 GCC and GCC High Compliance
 
-> **Review required (2026-09-29):** This file contains April 2026 tier,
-> impact-level, service, and package claims that have not all been revalidated.
-> Microsoft's current [cloud integration description](https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability)
-> says Office 365 GCC supports FedRAMP High and pairs with Entra ID in Azure;
-> GCC High pairs with Entra ID in Azure Government. Its [GCC High and DoD
-> description](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/gcc-high-and-dod)
-> describes GCC High as able to demonstrate IL4 equivalency or CMMC inheritance,
-> and Office 365 DoD as DoD SRG IL5 certified. Do not copy the old GCC Moderate
-> or GCC High IL5 statements below into an SSP. Verify the exact service and
-> package authorization and contractual requirement first.
-
-> Source: NIST SP 800-171 Rev 2; CMMC Assessment Guide Level 2 (DoD
-> CIO); DFARS 252.204-7012; FedRAMP Marketplace
-> (marketplace.fedramp.gov) including the Microsoft Office 365
-> GCC High package (MSO365MT); Microsoft Learn compliance
-> documentation (learn.microsoft.com/compliance); Azure Government
-> compliance scope
-> (learn.microsoft.com/en-us/azure/azure-government/compliance);
-> DoD CSP SRG v1r1 (public.cyber.mil); NIST CMVP validated modules
-> registry (csrc.nist.gov).
+> **Authorization review: 2026-10-29.** Microsoft descriptions, government
+> Marketplace records, and DoD impact-level equivalency are separate evidence.
+> Read "FedRAMP and Impact Level posture" below for the dated reconciliation
+> and source links. Other feature guidance remains subject to current checks.
 
 ## Overview
 
@@ -33,20 +17,14 @@ Decision 5.
 
 Microsoft 365 government tenancies serve distinct audiences:
 
-- **Commercial.** Public-sector and private-sector workloads;
-  FedRAMP Moderate on specific services; DoD IL2 for non-CUI
-  federal. Not appropriate for CUI under DFARS 7012.
-- **GCC (Government Community Cloud).** Microsoft describes Office 365 GCC
-  as supporting FedRAMP High; its identity pairing is with Entra ID in Azure.
-  Confirm the exact service authorization and contract conditions for CUI.
-- **GCC High (Government Community Cloud High).** Defense
-  contractors, IL4-equivalent workloads, DFARS 7012 CUI handling,
-  ITAR-controlled environments. Sovereign tenancy physically
-  and logically separate from commercial Microsoft 365.
-- **DoD.** Department of Defense mission-owner workloads.
-  Reserved for DoD consumption; contractors typically do not
-  land here directly but may interact with DoD tenants through
-  cross-tenant collaboration.
+- **Commercial.** Keep non-CUI work here where the contract permits. Do not
+  use the GCC package as evidence for Commercial productivity services.
+- **GCC.** Evaluate against the actual CUI category, contract, and service
+  boundary; see the unresolved vendor/Marketplace classification difference below.
+- **GCC High.** Evaluate for workloads needing its government boundary and
+  export-control commitments. Its name does not establish a DoD PA.
+- **DoD.** Microsoft limits purchase to DoD entities. Contractors must verify
+  eligibility and the mission owner's authorization path rather than assume access.
 
 Read this file alongside
 `references/modern-it/productivity/README.md` (the Phase 5d hub
@@ -58,14 +36,9 @@ the FedRAMP-to-IL crosswalk under CSP SRG v1r1, and
 the Azure IaaS and platform services that M365 GCC High runs
 on top of.
 
-**Current tier summary (reviewed 2026-09-29).** Microsoft describes Office
-365 GCC as supporting FedRAMP High. Its GCC High service description says it
-can demonstrate IL4 equivalency or CMMC inheritance, while Office 365 DoD is
-DoD SRG IL5 certified. These are vendor descriptions, not a blanket approval
-of every service, feature, or contractor workload. Check the FedRAMP Marketplace
-package record and contractual requirements before putting an authorization
-claim or package identifier in an SSP. Sources: [Microsoft cloud integration](https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability),
-[Microsoft GCC High and DoD](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/gcc-high-and-dod).
+**Current tier summary.** Use the source-separated table in "FedRAMP and
+Impact Level posture" and `references/data/fedramp-snapshot.json`. An offering's
+listing does not establish authorization for every feature or customer workflow.
 
 ---
 
@@ -112,102 +85,65 @@ Not covered:
 
 ## Tenancy Selection
 
-Per hub Decision 3, this section answers three questions in
-order. This is the authoritative decision tree for Microsoft
-365 tenancy selection; Phase 5b's `windows-fleet.md` carries a
-compact pointer here.
+Record the following before recommending a migration or claiming inheritance.
 
-**1. Is Microsoft 365 Commercial ever acceptable for CUI?** No.
-Commercial M365 holds FedRAMP High on specific services but
-does not meet the DoD IL4/IL5 operator-access restrictions
-that CSP SRG v1r1 imposes for CUI. Commercial is appropriate
-for non-CUI federal workloads or non-federal workloads but
-must not host CUI subject to DFARS 252.204-7012. A contractor
-running CUI in Commercial M365 has a scope problem, not a
-tuning problem; the path forward is a migration to GCC High
-(or Workspace Assured Controls Plus) rather than
-configuration tightening.
+**1. Establish the contract and data flow.** Identify FCI, CUI/CDI categories,
+export-controlled data, and every place the workload stores, processes, or
+transmits them. Read the actual clauses and flow-downs, CMMC assessment
+requirement, agency conditions, and any explicit DoD IL requirement. Distinguish
+contractor systems from an IT service operated on behalf of the Government.
+[DFARS 252.204-7012](https://www.acquisition.gov/dfars/252.204-7012-safeguarding-covered-defense-information-and-cyber-incident-reporting.)
+(b)(1) and (b)(2) use different paths. Paragraph (b)(2)(ii)(D) requires an
+external CSP handling CDI to meet the FedRAMP Moderate-equivalent baseline
+and paragraphs (c)-(g); it does not itself prescribe GCC High, FedRAMP High,
+a DoD IL5 PA, or a particular CMMC assessment type. Verified 2026-10-29.
 
-**2. Which government tenancy is the contractor path: GCC,
-GCC High, or DoD?**
+**2. Evaluate the tenancy for that workload.**
 
-- **GCC** is FedRAMP Moderate plus DoD IL2. Appropriate for
-  federal agency non-CUI work and contractor workloads where
-  the contract specifies FedRAMP Moderate equivalence without
-  IL4/IL5 overlay requirements. Some agencies accept GCC for
-  limited CUI scenarios under specific contract language;
-  verify with the Contracting Officer before assuming.
-- **GCC High** is FedRAMP High plus DoD IL5 (with IL4
-  inheriting). Appropriate for DFARS 7012 CUI, ITAR-controlled
-  technical data, IL5 mission-critical workloads, and the
-  typical defense-contractor scenario. Sovereign tenancy
-  physically and logically separate from commercial M365;
-  Microsoft operator access restricted to screened US-persons.
-  This is the common defense-contractor path.
-- **DoD** is IL5 plus DoD-exclusive infrastructure reserved for
-  Department of Defense mission owners. Contractors typically
-  interact with DoD tenants as external collaborators rather
-  than as primary tenants.
+- **Commercial:** Microsoft's current [compliance explanation][ms-comparison]
+  excludes Commercial productivity data enclaves from the GCC FedRAMP package.
+  Conditional Access and DLP cannot expand that boundary. Keep Commercial for
+  non-CUI workflows where permitted; isolate CUI in an appropriately supported
+  environment or migrate the affected workflows. Verify separately authorized
+  Azure services separately, even when bundled in the same Microsoft license.
+- **GCC:** Consider it when the CUI category and written contract requirements
+  fit. Microsoft describes DFARS 7012 flow-down support, with CUI limitations.
+  Obtain the applicable agreement, attestation, and package scope, including
+  incident obligations (c)-(g). Resolve any required High-level coverage against
+  the differing source descriptions below before relying on it.
+- **GCC High:** Consider it for the government boundary and export-control
+  requirements. Verify applicable contractual commitments and service scope.
+  IL4 equivalency is a vendor description, not evidence of a DISA IL4/IL5 PA.
+- **An explicit IL5 requirement:** Request the current service-specific DoD
+  authorization, conditions, and mission-owner acceptance. Do not route this
+  automatically to GCC High. Microsoft's DoD offering has different eligibility;
+  evaluate an eligible authorized service with the contracting/mission owner.
 
-**Regulatory mechanics behind the default recommendation.**
-DFARS 252.204-7012(b)(2)(ii)(D) requires FedRAMP Moderate
-equivalence for CSPs handling CUI; GCC Moderate satisfies that
-equivalence on its face. The common-contractor preference for
-GCC High rests on two operational considerations rather than
-statutory requirement: (1) several DoD contract vehicles and
-flow-downs explicitly reference DoD IL5, which GCC High
-directly carries while GCC does not, and (2) enforcement
-against future regulatory tightening is easier from the higher
-tenancy (a contract that tightens from Moderate-equivalent to
-IL5 mid-performance is more disruptive for a GCC contractor
-than for a GCC High contractor). The tenancy decision belongs
-in a tenancy-selection workflow informed by contract-vehicle
-language, not in an endpoint-posture default.
+**3. Verify each service and dependency.** Inventory mail, files, Teams,
+identity, Intune, Defender, Purview, Power Platform, AI features, connectors,
+backup, telemetry, support, and cross-tenant access. Record the SKU, cloud,
+feature, region where applicable, data path, package ID, current status,
+authorization boundary, source URL, and access date. Check exclusions and
+customer responsibilities in the package/ATO and service documentation.
+A Microsoft 365 license can bundle services covered by different Microsoft 365
+and Azure packages. Neither availability nor bundling proves authorization.
+[Microsoft's scope matrix][ms-scope] is a starting index; obtain the applicable
+package evidence before claiming inherited controls.
 
-**Management-plane tenancy inheritance.** The tenancy choice
-drives what inheritance the contractor can claim for
-management-plane control surfaces (Intune for endpoint
-management, Defender for Endpoint for EDR, Purview for
-compliance). A management plane running in GCC High inherits
-the GCC High FedRAMP High P-ATO plus IL5 PA; a management
-plane running in GCC inherits FedRAMP Moderate plus IL2. The
-productivity-suite tenancy and the management-plane tenancy
-must match. Splitting them (for example, M365 GCC High for
-productivity but Intune GCC for endpoint management) is not
-supported and creates an inheritance-mismatch scope problem.
+**4. Verify personnel and support boundaries.** Microsoft's [GCC High/DoD
+service description][ms-gcch] documents citizenship screening for personnel
+accessing customer content. It separately excludes customer support from the
+service accreditation boundary. Keep CUI out of ordinary support tickets and
+confirm an approved support channel and recipient authorization before sharing.
+Evaluate contractor and guest access under the actual export-control terms;
+a tenant purchase does not authorize an export or make all personnel eligible.
 
-The default recommendation for a defense contractor handling
-CUI under DFARS 7012 is GCC High. GCC is a viable choice only
-when the contract explicitly accepts FedRAMP Moderate
-equivalence and the workload does not trigger IL4/IL5 overlay
-requirements.
-
-**3. What workload-location and support-personnel-citizenship
-boundaries apply inside the chosen tenancy?**
-
-- **GCC:** US data residency; Microsoft operator personnel
-  with US-based screening; support cases routed through
-  government-tenancy channels.
-- **GCC High:** US data residency enforced at the sovereign-
-  tenancy boundary; Microsoft operator personnel are
-  screened US-persons (citizens, US nationals, or US-persons
-  as defined under CSP SRG v1r1); support cases handled by
-  US-person personnel in the government-tenancy support
-  infrastructure. ITAR-controlled technical data is an
-  established use case.
-- **DoD:** US data residency; DoD-specific personnel controls
-  layered on top of GCC High equivalent posture; support
-  handled by DoD-cleared Microsoft personnel.
-
-The contractor-side personnel posture is distinct from the
-Microsoft-side posture. A non-US-person contractor employee
-cannot serve as a Microsoft support escalation contact in GCC
-High, and may or may not be permitted to administer the
-contractor's own M365 tenancy depending on the contract's
-export-control terms. If ITAR-controlled or EAR-controlled
-technical data is present, US-person-only staffing may apply
-to the contractor side as well; consult export-control counsel
-before finalizing personnel policy.
+**5. Document the decision.** Keep a contract-to-service matrix and shared-
+responsibility record in the SSP evidence set. If a status, scope, or contract
+condition cannot be established, mark it **unverified** and identify the
+specific evidence needed. Offer a scoped enclave, an eligible alternative,
+or a staged migration while the missing evidence is obtained. Do not replace
+uncertainty with either blanket approval or blanket exclusion of GCC.
 
 ---
 
@@ -299,11 +235,11 @@ Access lockout).
 
 **Implementation notes.**
 
-- Workforce identity for CUI workloads must live in an Entra
-  ID Government tenant, not in a commercial Entra ID tenant
-  federated into Government. The identity plane is a CUI
-  attack surface; CUI-capable workloads require a CUI-capable
-  identity plane.
+- Match the identity design to the chosen service cloud and supported
+  federation. GCC pairs with Entra ID in Azure; GCC High and DoD pair with
+  Entra ID in Azure Government ([Microsoft integration][ms-integration],
+  verified 2026-10-29). Scope identity dependencies and verify their own
+  authorization and contract fit; CUI alone does not prescribe one identity cloud.
 - Conditional Access policies should require phishing-
   resistant MFA (FIDO2 security keys, Windows Hello for
   Business, or certificate-based authentication) for
@@ -343,10 +279,9 @@ Access lockout).
 
 **Common mistakes.**
 
-- Federating Entra ID Government against a commercial IdP for
-  primary workforce identity. The CUI boundary extends into
-  the commercial IdP; this undoes the GCC High tenancy
-  isolation.
+- Ignoring an external identity provider in the boundary analysis. Verify
+  supported federation, authentication data flows, and the provider's role
+  and obligations before claiming control inheritance.
 - Using SMS or phone-call MFA as the primary factor. Phishing-
   resistant methods are the assessor-preferred default.
 - Granting standing Global Administrator to staff. PIM-
@@ -365,7 +300,7 @@ storage and synchronization); and Microsoft Teams (persistent
 chat, channels, meetings, calls, file sharing integrated with
 SharePoint and OneDrive). Each service ships in the GCC High
 tenancy with distinct authorization scope documented at the
-FedRAMP Marketplace package (MSO365MT).
+GCC High package (FR1824057433), subject to current scope verification.
 
 **CMMC practices implemented.** AC.L2-3.1.3 (CUI flow control
 between services), AC.L2-3.1.18 (mobile device connection
@@ -395,7 +330,7 @@ event creation), AU.L2-3.3.2 (user accountability).
   properties; verify channel type before designating CUI
   containers.
 - Per-service authorization status for each of these services
-  in GCC High is at the FedRAMP Marketplace package MSO365MT.
+  in GCC High must be checked against package FR1824057433 and its scope.
   Not every feature enhancement ships with FedRAMP
   authorization at GA; verify the specific feature
   authorization before relying on it for CUI.
@@ -427,15 +362,9 @@ event creation), AU.L2-3.3.2 (user accountability).
 
 ## Endpoint management plane: Intune
 
-**Capability.** Microsoft Intune in the GCC High tenancy
-manages Windows, macOS, iOS, and Android endpoints through
-the MDM and MAM protocols. Intune delivers configuration
-profiles, compliance policies, application protection
-policies, app deployment, Autopilot provisioning, and
-integration with Defender for Endpoint. Intune GCC High is
-separate from Intune Commercial and Intune GCC; tenancy
-selection for endpoint management must match the productivity
-tenancy.
+**Capability.** Intune provides endpoint management. Verify the supported
+cloud pairing, feature availability, and Intune authorization boundary for the
+chosen Microsoft 365 deployment; do not infer these from an E3/E5 license.
 
 **CMMC practices implemented.** CM.L2-3.4.1 (baseline
 configuration), CM.L2-3.4.2 (configuration enforcement),
@@ -447,11 +376,9 @@ endpoint-side capability-to-practice mapping.
 
 **Implementation notes.**
 
-- Intune tenancy must match the productivity tenancy. An
-  organization running M365 GCC High for productivity but
-  Intune Commercial for endpoint management has a scope
-  problem: the commercial Intune tenancy is not
-  CUI-authorized and cannot manage CUI endpoints.
+- Confirm Intune's supported tenant integration and data/telemetry paths.
+  Evaluate the exact service against the contract, rather than declaring
+  every commercial management service ineligible from its name alone.
 - Intune Administrator roles are separate from M365 Admin
   Center roles and from Entra ID roles. Apply PIM to Intune
   role assignments.
@@ -464,18 +391,9 @@ endpoint-side capability-to-practice mapping.
   evaluation. A device must be Intune-enrolled and compliant
   before Conditional Access grants access to CUI workloads;
   this is the endpoint-identity integration pattern.
-- Per-service Intune GCC High authorization scope is
-  enumerated at marketplace.fedramp.gov under the Microsoft
-  Office 365 GCC High package (MSO365MT) and Microsoft Learn
-  Intune documentation. Not every Intune feature or
-  configuration service provider (CSP) policy in commercial
-  Intune ships simultaneously in GCC High; verify specific
-  feature authorization before relying on it for CUI
-  workloads. Third-party EDR or MDM agents operating alongside
-  or in place of Intune on CUI endpoints must terminate their
-  management plane in a government tenancy; a third-party agent
-  reporting into a commercial SaaS backend pulls the management
-  plane out of the GCC High authorization scope.
+- Find Intune's applicable scope in [Microsoft's scope matrix][ms-scope]
+  and the corresponding authorization package. Do not assign it the Office
+  365 package automatically. Check third-party MDM/EDR services separately.
 
 **Evidence to collect.**
 
@@ -488,8 +406,8 @@ endpoint-side capability-to-practice mapping.
 
 **Common mistakes.**
 
-- Running Intune Commercial alongside GCC High productivity.
-  The management plane must match the productivity tenancy.
+- Assuming a productivity subscription authorizes its management plane.
+  Verify service scope and supported integration independently.
 - Assuming Intune Administrator role grants Entra ID directory
   access. The role scopes are distinct; separate privileges
   apply.
@@ -592,10 +510,8 @@ monitoring), and SI.L2-3.14.7 (unauthorized use detection).
 - Defender for Office 365 Plan 2 includes Attack Simulation
   and Threat Explorer; Plan 1 is more limited. For CMMC L2
   CUI workflows, Plan 2 is the expected tier.
-- Defender for Endpoint tenancy must match the productivity
-  tenancy. An MDE Commercial instance cannot cover GCC High
-  endpoints; the CUI telemetry must terminate in the GCC
-  High tenancy.
+- Verify Defender for Endpoint's supported cloud integration and telemetry
+  destination against its own scope, the data category, and contract requirements.
 - Tamper Protection must be enabled. It prevents local
   administrators from disabling Defender components; this is
   an assessor-typical finding when disabled.
@@ -623,19 +539,17 @@ monitoring), and SI.L2-3.14.7 (unauthorized use detection).
 - Running Defender for Office 365 Plan 1 and assuming it
   covers the SI.L2-3.14.6 monitoring scope. Plan 2 is the
   defensible CMMC L2 tier.
-- Crossing tenancy boundaries: Defender Commercial telemetry
-  into a GCC High SIEM, or vice versa. Cross-tenancy
-  telemetry is not supported for CUI.
+- Exporting telemetry across boundaries without checking supported integration,
+  data classification, destination authorization, and contractual restrictions.
 
 ---
 
 ## Power Platform: Power Apps, Power Automate, Power BI
 
-**Capability.** Power Apps, Power Automate, and Power BI ship
-in Power Platform GCC (FedRAMP Moderate + DoD IL2) and Power
-Platform GCC High (FedRAMP High + DoD IL5) tenancies. Power
-Platform tenancy selection must match the M365 productivity
-tenancy for consistent CUI posture.
+**Capability.** Power Apps, Power Automate, and Power BI have distinct
+service and government-cloud scopes. Verify each environment, connector,
+feature, and applicable authorization using [Microsoft's scope matrix][ms-scope].
+An M365 tenancy label does not confer an authorization on Power Platform.
 
 **CMMC practices implemented.** When Power Platform is used
 for CUI workflows: AC.L2-3.1.3 (CUI flow control), CM.L2-3.4.1
@@ -658,8 +572,7 @@ through Power Platform audit logs).
 - Power Platform GCC High runs on Azure Government
   infrastructure (see
   `references/modern-it/cloud-platforms/azure-government.md`)
-  with the same tenancy posture as the rest of the M365 GCC
-  High stack.
+  but its authorization scope must be checked independently.
 - Audit logs ship to the M365 Compliance audit log; forward
   to SIEM alongside Exchange and SharePoint audit data.
 
@@ -686,10 +599,8 @@ through Power Platform audit logs).
   CUI exposure is a concern, require admin approval for new
   custom connectors, and audit Power App and Flow creation
   through the Power Platform admin activity logs.
-- Mixing Power Platform GCC (Moderate) environments with
-  Power Platform GCC High (High) environments inside the
-  same tenancy. Tenancy-tier consistency applies here as
-  with the rest of the M365 stack.
+- Assigning a blanket impact level based on a Power Platform cloud name.
+  Check the specific service, supported tenant pairing, and authorization scope.
 
 ---
 
@@ -767,29 +678,23 @@ CMMC personnel screening under PS.L2-3.9.1 and PS.L2-3.9.2.
 
 ## Support and operator-access posture
 
-**Capability.** Microsoft 365 GCC High Support is handled by
-screened US-person Microsoft personnel in the government-
-tenancy support infrastructure. Support plans (Developer,
-Standard, Professional Direct, Unified) apply separately in
-GCC High from commercial; for CUI workloads, Professional
-Direct or Unified is the typical tier for incident response
-SLAs. Microsoft operator personnel with production access to
-GCC High infrastructure are screened US-persons per CSP SRG
-v1r1 Personnel Requirements.
+**Capability.** Distinguish production operator access from support case
+handling. [Microsoft's service description][ms-gcch] explicitly excludes
+GCC High/DoD customer support from the service accreditation boundary
+(verified 2026-10-29). A support plan does not extend that boundary.
 
 **CMMC practices implemented.** PS.L2-3.9.1 (personnel
 screening) and PS.L2-3.9.2 (personnel transfer) are inherited
 from Microsoft for the Microsoft-operator side; the
 contractor still owns these practices for contractor personnel.
-SR (Supply Chain Risk Management) controls inherit from
-Microsoft under the FedRAMP authorization.
+Validate any supplier-control inheritance against the applicable package
+and customer-responsibility matrix; this does not extend to ordinary support.
 
 **Implementation notes.**
 
 - Support cases must not include CUI data in case descriptions
-  or attachments. Microsoft support handles FedRAMP-scope
-  cases; case-data sanitization is the contractor's
-  responsibility.
+  or attachments in ordinary channels. Sanitize case data and verify an
+  approved channel before sharing controlled content.
 - Compliance Manager and the Service Trust Portal provide
   downloadable Microsoft attestations for inherited controls.
   Use these to support SSP inheritance narrative.
@@ -817,47 +722,35 @@ Microsoft under the FedRAMP authorization.
 
 ## FedRAMP and Impact Level posture
 
-**FedRAMP status (verified 2026-04-21).**
+**Verified 2026-10-29.** Preserve the authority and scope of each statement:
 
-- Microsoft Office 365 GCC High holds a FedRAMP High JAB
-  P-ATO under package MSO365MT
-  (marketplace.fedramp.gov/products/MSO365MT). The JAB P-ATO
-  pathway is defunct for new authorizations, but existing
-  P-ATOs remain in force.
-- Microsoft Office 365 GCC holds a FedRAMP Moderate
-  authorization; verify current package identifier at
-  marketplace.fedramp.gov.
-- Microsoft Office 365 Commercial holds a FedRAMP High P-ATO
-  on specific services.
+| Offering | Government record observed | Microsoft description | Interpretation limit |
+|---|---|---|---|
+| GCC | [MSO365MT][gcc-record]: FedRAMP Certified; Rev5, Agency, Class C (Moderate) | [Government buying guide][ms-buy] and [integration guide][ms-integration] describe FedRAMP High support | The Marketplace profile and vendor description differ. Obtain the relevant High-level package/ATO evidence before asserting a High authorization for a specific service. Do not label all GCC services Moderate-only. |
+| GCC High | [FR1824057433][gcch-record]: FedRAMP Certified; Rev5, Agency, Class D (High) | [Service description][ms-gcch]: FIPS 199 High assessment, IL4 equivalency or CMMC inheritance | Agency ATO path, not a GCC High JAB P-ATO. IL4 equivalency is not a DISA PA and establishes no IL5 authorization. |
+| DoD | No independent DoD authorization record verified in this review | [Service description][ms-gcch]: DoD SRG IL5, purchase restricted to DoD entities | Obtain the current DoD authorization and verify eligibility, service scope, and mission-owner conditions. |
 
-**DoD Impact Level posture (verified 2026-04-21).** Microsoft
-365 GCC High holds DoD IL2, IL4, and IL5 Provisional
-Authorizations under CSP SRG v1r1 reciprocity rules. IL5
-requires FedRAMP High baseline (a change from retired CC SRG
-v1r4); Microsoft 365 GCC High's FedRAMP High P-ATO is the
-baseline on which the IL5 PA sits. Microsoft 365 GCC holds
-DoD IL2. Microsoft 365 DoD holds IL5 under separate DoD-
-exclusive authorization.
+**Package identity.** MSO365MT belongs to GCC; FR1824057433 belongs to GCC
+High. Microsoft's [FedRAMP overview][ms-fedramp] links to both. Older names
+including Office 365 Multi-Tenant or Commercial do not extend GCC's boundary
+to Commercial subscribers. Do not assign Azure's P-ATO or PA to Microsoft 365
+merely because the service uses Azure infrastructure.
 
-**Per-service authorization verification pattern.** The per-
-service authorization scope (which specific Office 365
-services are in FedRAMP / IL scope within each tenancy) is
-enumerated at the FedRAMP Marketplace package pages. For M365
-GCC High the authoritative source is
-marketplace.fedramp.gov/products/MSO365MT. A contractor
-building an SSP cites the current package scope and records
-the verification date; Microsoft's own public compliance
-pages may lag the Marketplace.
+**Evidence limits.** This review verified public listing fields and vendor
+descriptions, not restricted package contents, every service/feature, or an
+independent DISA PA. Record those checks separately. If sources conflict,
+retain both observations and mark the disputed claim unresolved; do not invent
+an upgrade, downgrade, revocation, or blanket equivalence. FedRAMP authorization,
+DoD impact-level equivalency, and CMMC certification are different determinations.
 
-**Scope boundary for IL content in this file.** This section
-names the tenancy-level authorizations and points at the hub
-crosswalk. It does not implement IL4 or IL5 end-to-end. Full
-IL4/IL5 implementation detail (CNSSI 1253 overlays beyond
-the general framing, NSS controls, workload-category
-criteria) is deferred to a future DoD-specific reference per
-the forward-reference in `references/fedramp-gap.md`
-"Relationship to DoD Cloud Computing Security Requirements
-Guide."
+[gcc-record]: https://www.fedramp.gov/marketplace/products/MSO365MT/
+[gcch-record]: https://www.fedramp.gov/marketplace/products/FR1824057433/
+[ms-fedramp]: https://learn.microsoft.com/en-us/compliance/regulatory/offering-fedramp
+[ms-buy]: https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/microsoft-365-government-how-to-buy
+[ms-gcch]: https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/gcc-high-and-dod
+[ms-integration]: https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability
+[ms-scope]: https://learn.microsoft.com/en-us/azure/azure-government/compliance/azure-services-in-fedramp-auditscope
+[ms-comparison]: https://www.microsoft.com/en-us/microsoft-cloud/blog/us-government/2024/09/23/understanding-compliance-between-commercial-government-dod-secret-offerings-may-2026-update/
 
 ---
 
@@ -955,7 +848,7 @@ Acronyms used in this file. Terms defined in
 Phase 5 slices are not repeated here.
 
 **DoD tenancy.** The Microsoft 365 tenancy variant reserved for
-Department of Defense mission-owner workloads. Holds IL5 PA;
+Department of Defense mission-owner workloads. Microsoft describes DoD SRG IL5;
 contractors typically interact as external collaborators
 rather than primary tenants.
 
@@ -970,10 +863,8 @@ service in GCC High as in commercial tenancies architecturally
 but authorized separately and running in a distinct data
 plane.
 
-**MSO365MT.** The FedRAMP Marketplace package identifier for
-the Microsoft Office 365 GCC High JAB P-ATO. Verify current
-authorization scope at
-marketplace.fedramp.gov/products/MSO365MT.
+**MSO365MT / FR1824057433.** The GCC / GCC High package identifiers,
+respectively. See the source-separated table above for verification limits.
 
 **Purview.** Microsoft's unified compliance platform covering
 DLP, Sensitivity Labels, Retention, Records Management,

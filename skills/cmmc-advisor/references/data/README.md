@@ -9,7 +9,7 @@ that corpus prose files hedge to.
 ## Files
 
 - **fedramp-snapshot.json.** FedRAMP authorization state for the
-  six productivity-corpus vendors (Microsoft 365 GCC, Microsoft
+  seven productivity-corpus entries (Microsoft 365 GCC, Microsoft
   365 GCC High, Google Workspace + Assured Controls Plus,
   Atlassian Government Cloud, ServiceNow GCC, GitHub Enterprise
   Cloud, Box for Government) plus the three AI-service vendors
@@ -24,14 +24,31 @@ authorization-state facts. Each entry carries:
 - `id`: stable identifier
 - `product`: vendor-facing product name
 - `vendor`: parent vendor
-- `fedramp_impact_level`: Low / Moderate / High / Tailored
-- `dod_impact_level`: array of applicable IL authorizations
+- `fedramp_impact_level`: Low / Moderate / High / Tailored. For refreshed Microsoft entries this records the government Marketplace profile, not a vendor-wide classification.
+- `dod_impact_level`: array of verified IL authorizations for refreshed entries; an empty array with `dod_authorization_verification.status: unverified` means not verified, not absent. Legacy entries retain their original semantics.
 - `authorization_type`: P-ATO, JAB P-ATO, Agency ATO, Tailored
 - `package_hint`: hint for finding the Marketplace package
 - `cui_suitability`: short phrase on DFARS 7012 fit
-- `primary_source`: authoritative URLs for verification
+- `primary_source`: authoritative URL(s) for verification
 - `corpus_references`: which cmmc-advisor files cite this vendor
 - `notes`: caveats, model-level availability, common miscitations
+
+### Source separation in schema 1.1
+
+The refreshed GCC and GCC High entries add:
+
+- `package_id` and `marketplace_record`: exact identifier, government URL,
+  observed status/profile/path, access date, and verification scope.
+- `vendor_description`: separately attributed FedRAMP, DoD, and identity
+  descriptions with sources and access date.
+- `dod_authorization_verification`: whether independent DoD evidence was checked.
+- `reconciliation_status`: whether public sources agree or remain unresolved.
+
+GCC's Marketplace Moderate profile and Microsoft's High-support description
+must coexist. Do not silently promote the listing or erase the vendor claim.
+Neither entry verifies individual service/feature coverage. Require current
+contract-specific and service-specific authorization checks before use.
+Other entries remain legacy snapshots; no new verification is implied.
 
 ## What the snapshot is not
 
@@ -45,9 +62,10 @@ authorization-state facts. Each entry carries:
   categories. This snapshot scopes to the vendors the cmmc-advisor
   corpus references directly. Other authorized products exist and
   are fit for other contractor needs.
-- **Not real-time.** The snapshot carries a `verification_date`
-  field at the root and per-vendor notes with dates. Authorization
-  state changes weekly; the snapshot drifts.
+- **Not real-time.** Root `verification_date` is the legacy full-snapshot
+  date. Entry-level `verification_date` overrides it only for that entry.
+  Root `last_updated` records editing, not verification of all vendors.
+  Entries without an override were not revalidated in the partial refresh.
 
 ## Refresh cadence and mechanics
 
@@ -64,8 +82,9 @@ at minimum.
 2. Open each vendor's compliance or trust center page and confirm
    DoD IL overlays, CUI-suitability framing, and any recent
    announcements.
-3. Update the JSON entry with the current state, bumping the root
-   `verification_date` to the refresh date.
+3. Update that entry's `verification_date`. For a partial refresh, update
+   `last_updated` and `scope_note` while retaining the root legacy date.
+   Change the root verification date only after rechecking every entry.
 4. For each vendor whose state changed materially, update the
    corresponding corpus file prose with the new dated stamp and
    reference this snapshot for the machine-readable record.
@@ -80,7 +99,7 @@ task; the manual process above is the current reality.
 ## Schema
 
 See `fedramp-snapshot.json` root field `schema_version` (currently
-"1.0"). Field semantics in the "What the snapshot is" section
+"1.1"). Field semantics in the "What the snapshot is" section
 above. Backward-compatibility is not promised across schema
 version bumps; consumers should check the version before parsing.
 

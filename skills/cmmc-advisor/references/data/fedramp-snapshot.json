@@ -1,33 +1,90 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "verification_date": "2026-04-21",
-  "scope_note": "This snapshot covers the FedRAMP-authorized managed-service vendors named in Phase 5d productivity and Phase 5 AI services. It is not a complete catalog of the FedRAMP Marketplace. Vendor authorization state changes weekly; verify at marketplace.fedramp.gov before citing in an SSP.",
+  "scope_note": "Partial refresh: Microsoft 365 GCC and GCC High reviewed 2026-10-29. Root verification_date remains the legacy snapshot date for entries without an override; other vendors were not revalidated. Public listing observations, vendor descriptions, and DoD authorization evidence are distinct. Recheck exact service, contract, and current authorization before SSP or procurement use.",
   "vendors": [
     {
       "id": "microsoft-365-gcc",
       "product": "Microsoft 365 Government Community Cloud (GCC)",
       "vendor": "Microsoft",
       "fedramp_impact_level": "Moderate",
-      "dod_impact_level": ["IL2"],
-      "authorization_type": "P-ATO",
-      "package_hint": "Microsoft Office 365 GCC",
-      "cui_suitability": "Limited CUI scenarios with agency agreement",
-      "primary_source": "marketplace.fedramp.gov; learn.microsoft.com/en-us/compliance/us-government/gov-cmmc",
-      "corpus_references": ["references/modern-it/productivity/microsoft-365-gcc.md"],
-      "notes": "For typical DFARS 7012 CUI, GCC High is the contractor path."
+      "dod_impact_level": [],
+      "authorization_type": "Agency ATO",
+      "package_hint": "Microsoft 365 Government Community Cloud & Supporting Services",
+      "cui_suitability": "Requires contract-specific and service-specific authorization checks, CUI category/export-control review, and DFARS 7012 (c)-(g) commitments.",
+      "primary_source": "https://www.fedramp.gov/marketplace/products/MSO365MT/",
+      "corpus_references": [
+        "references/modern-it/productivity/microsoft-365-gcc.md"
+      ],
+      "notes": "fedramp_impact_level records the Marketplace profile only; Microsoft separately describes High support. Do not infer Moderate-only capability or a verified High authorization; obtain applicable package/ATO evidence to resolve the difference.",
+      "verification_date": "2026-10-29",
+      "package_id": "MSO365MT",
+      "marketplace_record": {
+        "url": "https://www.fedramp.gov/marketplace/products/MSO365MT/",
+        "access_date": "2026-10-29",
+        "status": "FedRAMP Certified",
+        "type": "Rev5",
+        "path": "Agency",
+        "profile": "Class C (Moderate)",
+        "verification_scope": "Public listing only; restricted package and individual service/feature coverage not reviewed."
+      },
+      "vendor_description": {
+        "fedramp": "FedRAMP High",
+        "dod": "DISA SRG L2 in government buying guide",
+        "identity_cloud": "Entra ID in Azure",
+        "sources": [
+          "https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/microsoft-365-government-how-to-buy",
+          "https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability"
+        ],
+        "access_date": "2026-10-29"
+      },
+      "dod_authorization_verification": {
+        "status": "unverified",
+        "notes": "No independent service-specific DoD PA verified in this review. Empty dod_impact_level means unverified, not proof that no authorization exists. Vendor equivalency is not a PA."
+      },
+      "reconciliation_status": "unresolved_vendor_high_vs_marketplace_moderate"
     },
     {
       "id": "microsoft-365-gcc-high",
       "product": "Microsoft 365 Government Community Cloud High (GCC High)",
       "vendor": "Microsoft",
       "fedramp_impact_level": "High",
-      "dod_impact_level": ["IL2", "IL4", "IL5"],
-      "authorization_type": "JAB P-ATO",
-      "package_hint": "MSO365MT (Microsoft Office 365 GCC High)",
-      "cui_suitability": "Appropriate for CUI under DFARS 7012; sovereign tenancy",
-      "primary_source": "marketplace.fedramp.gov/products/MSO365MT",
-      "corpus_references": ["references/modern-it/productivity/microsoft-365-gcc.md"],
-      "notes": "Common DIB contractor path. Physically and logically separated from commercial M365."
+      "dod_impact_level": [],
+      "authorization_type": "Agency ATO",
+      "package_hint": "Microsoft 365 Government Community Cloud-High",
+      "cui_suitability": "Requires contract-specific and service-specific authorization checks, CUI category/export-control review, and DFARS 7012 (c)-(g) commitments.",
+      "primary_source": "https://www.fedramp.gov/marketplace/products/FR1824057433/",
+      "corpus_references": [
+        "references/modern-it/productivity/microsoft-365-gcc.md"
+      ],
+      "notes": "Do not infer IL5 or bundled-service inheritance. Verify exact service, feature, boundary, contract, and authorization record.",
+      "verification_date": "2026-10-29",
+      "package_id": "FR1824057433",
+      "marketplace_record": {
+        "url": "https://www.fedramp.gov/marketplace/products/FR1824057433/",
+        "access_date": "2026-10-29",
+        "status": "FedRAMP Certified",
+        "type": "Rev5",
+        "path": "Agency",
+        "profile": "Class D (High)",
+        "verification_scope": "Public listing only; restricted package and individual service/feature coverage not reviewed."
+      },
+      "vendor_description": {
+        "fedramp": "FedRAMP High",
+        "dod": "IL4 equivalency / CMMC inheritance",
+        "identity_cloud": "Entra ID in Azure Government",
+        "sources": [
+          "https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability",
+          "https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/microsoft-365-government-how-to-buy",
+          "https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/gcc-high-and-dod"
+        ],
+        "access_date": "2026-10-29"
+      },
+      "dod_authorization_verification": {
+        "status": "unverified",
+        "notes": "No independent service-specific DoD PA verified in this review. Empty dod_impact_level means unverified, not proof that no authorization exists. Vendor equivalency is not a PA."
+      },
+      "reconciliation_status": "consistent_at_public_fedramp_listing_level"
     },
     {
       "id": "google-workspace-assured-controls-plus",
@@ -40,7 +97,7 @@
       "cui_suitability": "Appropriate for CUI under DFARS 7012 with Assured Controls Plus overlay",
       "primary_source": "cloud.google.com/security/compliance/cmmc; services.google.com/fh/files/misc/gwsattestation2025.pdf (2025 CMMC attestation)",
       "corpus_references": ["references/modern-it/productivity/google-workspace.md"],
-      "notes": "Overlay model (not sovereign tenancy). IL5 is roadmap; use M365 GCC High for IL5 productivity workloads."
+      "notes": "Overlay model (not sovereign tenancy). Recheck current DoD scope; an IL5 requirement needs a service-specific authorization and eligible deployment, not an automatic GCC High recommendation."
     },
     {
       "id": "atlassian-government-cloud",
@@ -133,5 +190,6 @@
       "corpus_references": ["references/modern-it/ai-services/fedramp-ai-services.md"],
       "notes": "Claude 3.7 Sonnet confirmed at April 2025 announcement. Gemini and partner-model coverage via Vertex AI Model Garden varies; verify Assured Workloads release notes per-model before SSP citation. IL5 authorization is roadmap; IL5-requiring contracts route through Bedrock GovCloud or Azure OpenAI Government."
     }
-  ]
+  ],
+  "last_updated": "2026-10-29"
 }

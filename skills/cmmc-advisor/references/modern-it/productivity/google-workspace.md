@@ -56,10 +56,9 @@ current service-level scope before citing in an SSP.
 Workspace Assured Controls Plus supports IL4-aligned CUI
 workloads. Google Workspace does not hold an IL5 Provisional
 Authorization as of this slice's verification date; IL5 for the
-productivity plane requires Microsoft 365 GCC High or an
-alternative path. A contractor whose contract vehicle requires
-IL5 at the productivity layer must consider M365 GCC High
-rather than Workspace. See
+productivity plane requires a service-specific DoD authorization and an
+eligible deployment. Do not default to GCC High: Microsoft's IL4 equivalency
+description does not establish IL5. See `microsoft-365-gcc.md` (2026-10-29 review). See also
 `references/modern-it/cloud-platforms/cloud-selection.md`
 "FedRAMP baseline to DoD Impact Level crosswalk" for the
 IL-to-FedRAMP mapping.
@@ -184,11 +183,10 @@ US-person-only staffing may apply to the contractor side as
 well; consult export-control counsel before finalizing
 personnel policy.
 
-**Architectural-model choice note.** Contractors with IL4-scope
-CUI can choose either Microsoft 365 GCC High (sovereign tenancy,
-IL5-aligned, FedRAMP High) or Workspace Assured Controls Plus
-(overlay on commercial Workspace, IL4-aligned, FedRAMP High on
-in-scope services). This is a choice between architectural
+**Architectural-model choice note.** Evaluate Microsoft 365 GCC High and
+Workspace Assured Controls Plus against the actual contract and service
+requirements. For Microsoft's listing and IL4 equivalency description, see
+`microsoft-365-gcc.md`. This is a choice between architectural
 models (sovereign partition versus control-package overlay)
 as much as between vendors. The "ITAR posture under Assured
 Controls Plus" section below carries the architectural
@@ -627,15 +625,17 @@ with PS.L2-3.9.1 and PS.L2-3.9.2.
   carries EAR-controlled dual-use data, verify EAR posture
   separately with export-control counsel.
 
-**Architectural comparison with M365 GCC High.** Both tenancies
-support DFARS 7012 CUI under DoD IL4 reciprocity; both
-accommodate ITAR data. They deliver the posture through
+**Architectural comparison with M365 GCC High.** Evaluate each tenancy against
+the contract, CUI category, export controls,
+and exact service authorization. DFARS 7012 fit is not established by
+claiming DoD IL4 reciprocity. They deliver the posture through
 different mechanisms:
 
 - **M365 GCC High:** sovereign tenancy partition, physical and
   logical separation from commercial M365, US-person Microsoft
-  operator access enforced at the tenancy boundary, IL5-aligned
-  authorization. Migration from commercial M365 to GCC High
+  operator access controls, and service-specific authorization evidence.
+  See `microsoft-365-gcc.md` for the verified listing and vendor IL4 description.
+  Migration from commercial M365 to GCC High
   requires tenancy-level migration with distinct data-plane
   changes.
 - **Workspace Assured Controls Plus:** overlay on commercial
@@ -647,9 +647,9 @@ different mechanisms:
   Plus and overlay activation, not a tenancy-level migration.
 
 The choice between the two is a choice between architectural
-models, not just vendors. Contractors with IL5 workload
-requirements must choose M365 GCC High; contractors with
-IL4-scope CUI workloads can choose either.
+models, not just vendors. An IL5 requirement needs current DoD authorization
+evidence for the exact service and deployment; neither an architecture label
+nor an equivalency statement proves that requirement is met.
 
 **Evidence to collect.**
 
@@ -754,8 +754,9 @@ contractor personnel.
 Workspace Assured Controls Plus supports DoD IL4-aligned CUI
 workloads through the FedRAMP High baseline plus the overlay's
 personnel and residency commitments. Google Workspace does
-not hold an IL5 Provisional Authorization; IL5 for the
-productivity plane requires Microsoft 365 GCC High. See
+not hold an IL5 Provisional Authorization in this historical snapshot.
+For any current IL5 requirement, verify a service-specific DoD authorization
+and eligible deployment. GCC High is not an automatic IL5 alternative. See
 `references/modern-it/cloud-platforms/cloud-selection.md`
 "FedRAMP baseline to DoD Impact Level crosswalk" for the
 IL-to-FedRAMP mapping.

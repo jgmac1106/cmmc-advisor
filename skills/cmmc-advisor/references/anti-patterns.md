@@ -417,27 +417,21 @@ policies, DLP rules, retention policies. Contractor argues
 the policy configuration substitutes for a FedRAMP-authorized
 tenancy.
 
-**Why it fails.** DFARS 7012 requires FedRAMP Moderate
-equivalence, which commercial M365 and Workspace meet for
-federal use but not for CUI/DoD IL4+ under CSP SRG v1r1.
-Commercial tenancies run on the commercial-cloud operator-
-access boundary; US-person operator-access commitments and
-sovereign-tenancy requirements do not apply. Policy controls
-on a commercial tenancy do not substitute for the
-authorization boundary.
+**Why it fails.** Configuration cannot expand a CSP's authorization boundary.
+DFARS 252.204-7012(b)(2)(ii)(D) requires the applicable Moderate-equivalent
+baseline and incident obligations (c)-(g), not a universal IL4/IL5 overlay.
+Microsoft separates Commercial productivity from the GCC package; separately
+scoped Azure services need their own review. See the 2026-10-29 primary-source
+reconciliation in `references/modern-it/productivity/microsoft-365-gcc.md`.
 
-**CMMC practices broken.** CA.L2-3.12.1 (security
-assessment, inheritance from commercial cloud does not
-cover the required IL4/IL5 scope), SC.L2-3.13.11 (FIPS
-cryptography may not be enforced consistently), MP.L2-3.8.1
-(media protection depends on tenancy-level operator access).
+**CMMC evidence affected.** Validate inherited controls under CA.L2-3.12.1,
+cryptographic implementation under SC.L2-3.13.11, and media protection under
+MP.L2-3.8.1. A brand name alone establishes neither satisfaction nor failure.
 
-**What to do instead.** Migrate the CUI-handling surface to
-GCC High (Microsoft), Workspace Assured Controls Plus
-(Google), or an equivalent FedRAMP-authorized tenancy. See
-`references/modern-it/productivity/README.md` for the
-tenancy-selection framework. Policy controls layer on top of
-the authorized tenancy, not in place of it.
+**What to do instead.** Inventory the CUI data paths, contract requirements,
+and service boundaries. Evaluate GCC, GCC High, or another eligible offering
+against that evidence; isolate or migrate the affected workflows where needed.
+Retain configuration controls as part of the customer's responsibilities.
 
 ### Pattern 12: Shared service accounts with no attribution
 

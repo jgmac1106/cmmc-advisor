@@ -193,9 +193,10 @@ scale across the range rather than applying uniformly.
 
 **Common architectural patterns.**
 
-- **Tenancy migration.** Move from commercial Microsoft 365 or
-  commercial Google Workspace to GCC High or Workspace Assured
-  Controls Plus for CUI-handling users. Medium contractors
+- **Tenancy assessment and migration.** Evaluate contract requirements and
+  service-specific CUI coverage before choosing a government productivity
+  offering. For Microsoft, use `modern-it/productivity/microsoft-365-gcc.md`.
+  Migrate affected workflows when the existing boundary cannot meet the need. Medium contractors
   typically cannot isolate CUI work cleanly into an enclave; the
   business is too integrated, so the whole CUI-carrying
   productivity plane migrates.
@@ -513,8 +514,8 @@ compress the sequence as assessment deadlines dictate.
 
 **Medium profile, first-six-months priorities.**
 
-1. Tenancy migration to government-tier productivity (GCC High
-   or Assured Controls Plus) if not already complete.
+1. Contract-specific and service-specific tenancy assessment; migrate the
+   affected productivity workflows if authorization or contractual gaps remain.
 2. Formalize configuration management (CM domain) against a
    documented baseline.
 3. Implement incident response plan (IR domain) with tabletop

@@ -80,10 +80,10 @@ Covered:
 
 Not covered:
 
-- Azure Commercial Regions (the non-Government public Azure
-  cloud). Azure Commercial holds FedRAMP High but does not meet
-  DoD IL4/IL5 operator-access requirements and is not
-  appropriate for CUI under DFARS 252.204-7012.
+- Azure Commercial Regions (the non-Government public Azure cloud).
+  Evaluate separately scoped Azure services against the contract and data
+  category; do not treat them as Commercial M365 productivity or assume
+  a FedRAMP listing satisfies an explicit DoD IL4/IL5 requirement.
 - Azure Government DoD Regions (US DoD Central, US DoD East) and
   Azure Government Secret, Azure Government Top Secret
   environments. DoD-exclusive regions serve DoD mission owners
@@ -115,18 +115,14 @@ Per the Phase 5c hub (Decision 3), each per-provider file
 answers three tenancy-selection questions in the same order.
 For Azure:
 
-**1. Is the provider's commercial tenancy ever acceptable for
-CUI?** No. Azure Commercial Regions hold FedRAMP High but do
-not meet the DoD CSP SRG v1r1 operator-access restrictions that
-IL4 and IL5 impose. Azure Commercial is appropriate for non-CUI
-federal workloads or non-federal workloads, but CUI subject to
-DFARS 252.204-7012 must reside in an Azure Government Region
-where the US-person operator-access posture is in place. The
-Microsoft 365 GCC tenancy is also not appropriate for CUI in
-most contractor contexts; see
-`references/modern-it/endpoints/windows-fleet.md`
-"Management-plane split" for the GCC-versus-GCC-High
-distinction at the productivity-plane level.
+**1. Is the provider's commercial tenancy ever acceptable for CUI?**
+Evaluate the actual service and contract. Microsoft's [compliance comparison](https://www.microsoft.com/en-us/microsoft-cloud/blog/us-government/2024/09/23/understanding-compliance-between-commercial-government-dod-secret-offerings-may-2026-update/)
+(verified 2026-10-29) distinguishes Azure Commercial DFARS support from
+Commercial M365 productivity. Do not impose IL4/IL5 solely from 7012 or CUI;
+check explicit DoD requirements, data categories, export controls, scope, and
+incident commitments. The Microsoft 365 GCC decision is separate: use
+`references/modern-it/productivity/microsoft-365-gcc.md` "Tenancy Selection".
+Azure's authorizations do not transfer to a Microsoft 365 tenant.
 
 **2. Which government tenancy or control-plane isolation posture
 is the contractor path?** Azure Government is a separate Azure

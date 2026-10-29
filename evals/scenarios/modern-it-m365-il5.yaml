@@ -1,0 +1,28 @@
+id: modern-it-m365-il5
+title: Explicit IL5 requirement does not automatically select GCC High
+category: modern-it
+prompt: |
+  Our new task order explicitly says the collaboration service needs a DoD
+  IL5 provisional authorization. We are a private defense contractor. Our
+  reseller says GCC High inherits IL5 from Azure Government and all we need
+  is an E5 license. Can we use that assertion in our proposal? Which next
+  steps would get us to a supported Microsoft deployment?
+required_terms:
+  - GCC High
+  - IL5
+  - authorization
+factual_claims_expected: true
+expected_recommendation: |
+  Do not accept inherited IL5 from Azure or an E5 license as proof. Distinguish
+  FedRAMP, vendor IL4 equivalency, and a service-specific DoD PA. Verify the
+  actual task-order requirement, mission-owner acceptance, exact collaboration
+  services/features, authorization conditions, and deployment eligibility.
+  Office 365 DoD is vendor-described IL5 with DoD-only purchase eligibility;
+  a private contractor cannot simply purchase it as an unrestricted alternative.
+  Request current service-specific DoD evidence and an eligible delivery path
+  with the contracting/mission owner; mark unknowns unverified.
+evaluator_notes: |
+  Accuracy 0 for a blanket GCC High IL5 claim or recommendation, automatic
+  inherited PA, or proposing DoD tenancy without eligibility checks. Must
+  offer actionable steps and require contract-specific and service-specific
+  authorization checks. A FedRAMP URL alone does not prove a DoD PA.
