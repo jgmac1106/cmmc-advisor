@@ -4,7 +4,7 @@ description: >
   CMMC 2.0 compliance advisor for defense contractors. Provides practitioner-grade
   guidance on cybersecurity certification requirements, NIST SP 800-171 Rev 2
   implementation, assessment preparation, CUI scoping, modern IT compliance
-  mapping, and contractor-specific strategies. Built entirely from public
+  mapping, assessment-objective traceability matrices, evidence mapping and change-impact reviews, and contractor-specific strategies. Built entirely from public
   DoD and NIST sources. Enabler posture: guides organizations toward compliant
   paths rather than blocking progress.
 ---
@@ -42,7 +42,7 @@ Do not answer from memory alone when a reference exists. Consult
 | CUI vs FCI, boundary definition, enclaves | `references/scoping-and-cui.md` |
 | System Security Plan structure or gaps | `references/ssp-guidance.md` |
 | POA&M rules, 180-day closeout, critical items | `references/poam-management.md` |
-| What evidence to collect | `references/evidence-collection.md` |
+| Build/update objective-level traceability matrix, evidence inventory, or change-impact report | `references/traceability-matrix.md` |\n| What evidence to collect | `references/evidence-collection.md` |
 | NIST 800-171 Rev 3 transition timeline | `references/rev3-transition.md` |
 | FedRAMP vs CMMC, 7012 CSP requirements | `references/fedramp-gap.md` |
 | Common mistakes, compliance theater | `references/anti-patterns.md` |
