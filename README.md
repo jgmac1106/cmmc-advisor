@@ -10,7 +10,7 @@ When a compliant path exists, the skill maps it clearly. When no compliant optio
 
 ## What This Covers
 
-All three CMMC levels: Level 1 (Foundational), Level 2 (Advanced), Level 3 (Expert). 14 domains, 110 practices with full implementation guidance mapped from NIST SP 800-171 Rev 2. Assessment preparation for self-assessment, C3PAO, and DIBCAC paths. CUI scoping covering boundary definition, FCI vs CUI, and enclave strategies. SSP guidance and POA&M management.
+All three CMMC levels: Level 1 (Foundational), Level 2 (Advanced), Level 3 (Expert). 14 domains, 110 practices with full implementation guidance mapped from NIST SP 800-171 Rev 2. Assessment preparation for self-assessment, C3PAO, and DIBCAC paths. CUI scoping covering boundary definition, FCI vs CUI, and enclave strategies. SSP guidance, objective-level traceability matrices, evidence inventories, change-impact reviews, and POA&M management.
 
 Modern IT compliance mapping for real-world stacks:
 
@@ -52,7 +52,7 @@ For a project-scoped Codex skill, copy that same folder to `<project>/.agents/sk
 
 "Design a CUI enclave for a 30-person company using AWS GovCloud."
 
-"What evidence do I need to collect for the Access Control domain?"
+"What evidence do I need to collect for the Access Control domain?"\n\n"Build an objective-level traceability matrix from our canonical SSP, approved plans, and collected evidence."\n\n"Compare our revised Media Protection Plan with the traceability matrix and flag affected objectives."
 
 "We want to use AI coding tools in our development workflow. What are the compliant options?"
 ```
