@@ -41,3 +41,8 @@ On a revised policy/plan/SOP or architecture change: compare versions; identify 
 "Build the Level 2 objective-level traceability matrix from our canonical SSP and approved plans. Map each objective to exact sections and existing operational evidence, flag missing proof, preserve the gap analysis, and output the workbook plus change report."
 
 See `evidence-collection.md` for evidence categories and `ssp-guidance.md` for authoritative SSP maintenance.
+
+
+## Machine-readable OSCAL output
+
+Follow `oscal-rev2-interoperability.md` for OSCAL JSON model selection, Rev. 2 catalog provenance, objective crosswalks, strict schema validation, secure evidence links, and SSP/Assessment Plan/Assessment Results/POA&M exports. Do not treat a custom traceability JSON schema as an OSCAL document or substitute NIST 800-171 Rev. 3 content for the Rev. 2 baseline.
