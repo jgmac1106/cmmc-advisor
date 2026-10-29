@@ -22,3 +22,16 @@ remaining `verified 2026-04-21` assertions were **not** independently
 revalidated in this review. Treat them as historical context. The scenario
 graders no longer require the unverified product assertions. The skill now
 requires fresh primary-source checks before SSP-facing use.
+
+## Microsoft follow-up (2026-10-29)
+
+The September warning is now reconciled through the distributed corpus and
+structured snapshot. [GCC MSO365MT](https://www.fedramp.gov/marketplace/products/MSO365MT/)
+currently shows Class C (Moderate), Agency path; [GCC High FR1824057433](https://www.fedramp.gov/marketplace/products/FR1824057433/)
+shows Class D (High), Agency path. Both show FedRAMP Certified. Microsoft still
+describes GCC High-level support. Preserve that difference; neither a blanket
+Moderate-only claim nor an independently verified GCC High-level listing follows.
+GCC High's vendor IL4 equivalency is distinct from a DoD PA. See the October
+source register and `microsoft-365-gcc.md` for service and contract checks.
+Only these Microsoft entries and related cross-references were revalidated;
+other vendor claims retain their prior verification limits.

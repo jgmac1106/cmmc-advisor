@@ -610,10 +610,9 @@ and Provisioned managed deployment types.
 foundation models, first-party (Gemini, Gemma) and partner
 (Claude, Mistral, Meta Llama), accessible through Vertex AI.
 
-**MSO365MT.** Defined in
-`references/modern-it/productivity/microsoft-365-gcc.md`. Not
-directly relevant to Azure OpenAI Service but useful framing for
-contractors routing AI from M365 GCC High.
+**Microsoft 365 package identifiers.** MSO365MT is GCC; FR1824057433 is
+GCC High. Neither establishes Azure OpenAI authorization. See
+`references/modern-it/productivity/microsoft-365-gcc.md` (2026-10-29 review).
 
 **PTU (Provisioned Throughput Unit).** The Azure OpenAI
 provisioned-deployment billing unit. Data Zone Provisioned and

@@ -140,24 +140,12 @@ index, not a place for implementation depth.
 
 ### Decision 2: FedRAMP as primary axis; DoD Impact Level as overlay
 
-**Every compliance claim in this directory uses FedRAMP
-authorization as the primary axis and DoD Impact Level as a
-declared overlay.** Tenancy-level claims (GCC High is FedRAMP
-High, Assured Controls Plus is IL4) are the stable anchor; prose
-leans on these. Per-service authorization claims (Exchange Online
-IL5, Gmail IL4 under Assured Controls Plus, ServiceNow GCC IL4)
-carry dated verification stamps inline.
-
-**Rationale.** FedRAMP authorization is what CMMC L2 contractors
-encounter directly under DFARS 252.204-7012. Productivity
-vendors diverge sharply at the per-service authorization layer
-(not every M365 component is IL5-authorized even inside GCC
-High; not every Workspace component is IL4-authorized under
-Assured Controls Plus; Atlassian Government Cloud carries
-FedRAMP Moderate across Jira/Confluence/JSM but legacy tools
-have uneven coverage). FedRAMP as the primary axis keeps the
-prose legible at tier level while the per-service anchors sit
-in the per-vendor files.
+**Keep FedRAMP listing observations, vendor descriptions, and DoD impact-level
+claims separate.** Before selection, establish whether the contract requires a
+DoD overlay at all. An IL equivalency statement is not a PA. Every service,
+feature, cloud, and dependency needs dated authorization evidence; neither a
+suite name nor its underlying infrastructure proves coverage. The Microsoft
+reference records public-source differences and unresolved evidence explicitly.
 
 Full IL4 and IL5 implementation content remains deferred to a
 future DoD-specific reference, consistent with the Phase 5c
@@ -309,18 +297,18 @@ requires a deliberate decision, not an author's judgment call.
 
 ## Tier-level authorization snapshot
 
-Historical April 2026 snapshot; do not cite this table as current
-authorization evidence in an SSP. Microsoft's current documentation
-contradicts the GCC Moderate and GCC High IL5 entries below. See the
-2026-09-29 note in `microsoft-365-gcc.md`. Recheck every other entry at
-the primary provider source and current authorization record.
+Microsoft entries reviewed 2026-10-29; other entries remain historical April
+2026 claims and were not revalidated. See `microsoft-365-gcc.md` for primary
+links and the unresolved GCC vendor/Marketplace difference, and
+`references/data/fedramp-snapshot.json` for source-separated observations.
+Recheck contract-specific and service-specific authorization before SSP use.
 
 | Vendor / tenancy | FedRAMP tier | DoD IL | CUI suitability |
 |---|---|---|---|
-| Microsoft 365 Commercial | FedRAMP High (on specific services) | IL2 | Non-CUI federal; not appropriate for CUI |
-| Microsoft 365 GCC | FedRAMP High support per Microsoft | Verify exact service | Depends on service scope and contract |
-| Microsoft 365 GCC High | High categorization per Microsoft | IL4 equivalency / CMMC inheritance per Microsoft | Depends on service scope and contract |
-| Microsoft 365 DoD | FedRAMP High | IL5 (DoD-exclusive) | DoD mission owners only |
+| Microsoft 365 Commercial | GCC package does not cover Commercial productivity data enclaves | Verify separately scoped services | Keep non-CUI workflows where contract permits; configuration cannot extend a package boundary |
+| Microsoft 365 GCC | Microsoft: High support; Marketplace MSO365MT: Class C (Moderate), Agency path | Microsoft buying guide: SRG L2; verify service-specific DoD evidence | Resolve required coverage; check CUI category, contract, and service scope |
+| Microsoft 365 GCC High | Marketplace FR1824057433: Class D (High), Agency path | IL4 equivalency / CMMC inheritance per Microsoft, not a verified DoD PA | Depends on service scope, export controls, and contract |
+| Microsoft 365 DoD | High assessment per Microsoft; government record not independently checked here | IL5 per Microsoft service description; verify current DoD record | DoD eligibility and mission-owner conditions apply |
 | Google Workspace (Enterprise Plus) | FedRAMP High (on specific services) | n/a directly | Use Assured Controls Plus for CUI |
 | Google Workspace + Assured Controls Plus | FedRAMP High services + overlay | IL4-aligned | Appropriate for CUI under DFARS 7012 |
 | Atlassian Government Cloud | FedRAMP Moderate | n/a | CUI scenarios with agency agreement |
@@ -333,7 +321,7 @@ the primary provider source and current authorization record.
 **Reading the snapshot.** This table is a directory-level map,
 not an implementation guide. Per-vendor files in this directory
 carry the service-by-service authorization breakdown (which M365
-services are in scope at IL5 versus which are GCC-only, which
+services and features fall within a verified package boundary, which
 Workspace services are covered under Assured Controls Plus,
 which Atlassian apps are in Government Cloud versus Data Center
 only). A contractor building an SSP cites the per-vendor file's
@@ -354,10 +342,10 @@ meets the contract's requirement.
 **GCC High versus Workspace Assured Controls Plus. Equivalence
 is not symmetric.** Both tenancies can host CUI workflows under
 DFARS 7012, but they deliver that posture through different
-mechanisms. GCC High is a sovereign tenancy (FedRAMP High plus
-DoD IL5, physically and logically separate from commercial
-Microsoft 365, US-person operator access enforced at the
-tenancy partition). Workspace Assured Controls Plus is an
+mechanisms. GCC High uses a separate government boundary. Its FedRAMP
+listing and Microsoft's IL4 equivalency description are distinct evidence;
+see `microsoft-365-gcc.md`. Neither establishes a blanket DoD IL5 PA.
+Workspace Assured Controls Plus is an
 overlay on the commercial Google Workspace tenancy (FedRAMP
 High-authorized services plus the Assured Controls Plus
 package, US-person operator access enforced at the control-
@@ -502,12 +490,11 @@ the questions in this order. Store the answers in the SSP.
 1. **Is CUI present in the workload?** If no, FedRAMP Moderate
    equivalence under DFARS 7012 is not triggered; commercial
    tenancies are available. If yes, continue.
-2. **Which CC SRG Impact Level applies?** IL4 (standard CUI),
-   IL5 (mission-critical CUI, NSS non-classified). If IL5,
-   continue with the understanding that the productivity-suite
-   decision narrows to GCC High or Google Workspace Assured
-   Controls Plus; Atlassian Government Cloud at FedRAMP Moderate
-   does not carry IL5 for primary productivity workflows.
+2. **Does the contract require a DoD Impact Level or a Government-operated
+   service?** Establish this from the actual clauses and mission-owner
+   requirements, not from CUI alone. An explicit IL5 requirement needs a
+   current service-specific DoD authorization, eligibility, and acceptance.
+   Do not substitute a FedRAMP tier or vendor IL4 equivalency statement.
 3. **Is ITAR or EAR export-controlled data present in the
    productivity workflow?** If yes, the contractor needs
    sovereign-tenancy assurance (GCC High), residency-plus-
@@ -614,10 +601,9 @@ when export-controlled data is present.
 
 **IL4, IL5 (DoD Impact Level 4, Impact Level 5).** Defined in
 `references/modern-it/cloud-platforms/cloud-selection.md`
-"Terminology." In Phase 5d scope, IL4 is the typical landing
-spot for Google Workspace Assured Controls Plus and ServiceNow
-GCC; IL5 is the typical landing spot for Microsoft 365
-GCC High.
+"Terminology." Do not assign a DoD IL from a vendor name or FedRAMP tier.
+For Microsoft productivity, distinguish vendor equivalency from a verified
+service-specific PA using `microsoft-365-gcc.md`.
 
 **ITAR (International Traffic in Arms Regulations).** Defined
 in `references/modern-it/endpoints/remote-work.md`
@@ -638,12 +624,9 @@ here for Workspace client-side encryption.
 Google Workspace edition that carries Assured Controls Plus as
 an available add-on for CUI workloads.
 
-**GCC (Government Community Cloud).** Microsoft 365 tenancy at
-FedRAMP Moderate plus DoD IL2.
-
-**GCC High (Government Community Cloud High).** Microsoft 365
-sovereign tenancy at FedRAMP High plus DoD IL5. Physically and
-logically separate from commercial M365.
+**GCC / GCC High.** Microsoft 365 government offerings, not Azure region
+names. Use the source-separated snapshot above and the detailed Microsoft
+reference for current listing fields, vendor descriptions, and verification limits.
 
 **ITSM (IT Service Management).** The operational discipline
 and tooling category covering incident, change, request, and

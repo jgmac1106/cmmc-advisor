@@ -45,8 +45,8 @@ before deployment.
 decision (commercial, GCC, GCC High, DoD) is the authoritative
 subject of `references/modern-it/productivity/microsoft-365-gcc.md`
 "Tenancy Selection" per Phase 5d hub Decision 5. The decision
-drives what FedRAMP inheritance a contractor can claim for the
-Intune and Defender control surfaces sitting on top. The capability
+informs the integration design, but Intune and Defender authorization scope
+must be checked independently; a suite license does not confer inheritance. The capability
 and control mapping in this file applies regardless of tenancy,
 but FedRAMP inheritance depends on which tenancy hosts the
 management plane; read the productivity file for the full decision
@@ -243,9 +243,8 @@ AU.L2-3.3.1 (endpoint audit event generation).
   reporting before an endpoint is considered in compliance.
 - For Microsoft Defender for Endpoint, verify the tenancy
   (commercial, GCC, GCC High) matches the fleet's CUI posture.
-  MDE in GCC High is a separate service instance from MDE
-  commercial; crossing tenancies is not a supported
-  configuration.
+  Verify the supported integration, telemetry destination, and applicable
+  service authorization rather than infer eligibility from the suite license.
 - CMMC L1 anti-malware practices (SI.L1-3.14.2, 14.4, 14.5) are
   satisfied by Defender Antivirus alone. The CMMC L2 monitoring
   and unauthorized-use-detection practices (SI.L2-3.14.6, 14.7)
@@ -277,8 +276,8 @@ AU.L2-3.3.1 (endpoint audit event generation).
   degrade performance; Windows behavior in this case is driven by
   registry state that is easy to misconfigure.
 - Assuming Defender commercial and Defender GCC High data planes
-  are equivalent for CUI. They are not. CUI telemetry must
-  terminate in the GCC High tenancy.
+  are interchangeable. Check each telemetry destination against the data
+  category, service authorization, and contract requirements.
 
 ---
 
@@ -753,9 +752,10 @@ files for assessor-facing requirement text and evidence lists:
 - Audit and Accountability (AU): `references/domains/au-audit.md`
 - Media Protection (MP): `references/domains/mp-media-protection.md`
 
-For FedRAMP Moderate inheritance relevant when the Intune, SCCM,
-or Defender management planes are operated by a FedRAMP-
-authorized tenancy (GCC Moderate or GCC High), see
+For inheritance relevant to Intune or Defender cloud management planes,
+verify each service's authorization and contract fit separately from the
+productivity tenancy. SCCM operated on premises requires its own boundary
+and responsibility analysis. See
 `references/fedramp-gap.md` "Inherited vs shared-responsibility
 controls."
 
@@ -772,8 +772,8 @@ controls."
 > EDR agents (CrowdStrike, Defender for Endpoint, SentinelOne);
 > most CUI fleets combine one of each. Verify current FedRAMP
 > Marketplace status on marketplace.fedramp.gov before selecting;
-> GCC High coverage is required for Intune and Defender when CUI
-> flows through the management plane. This skill does not rank
+> Verify service-specific coverage and contractual conditions for Intune
+> and Defender data flows. This skill does not rank
 > vendors.
 
 ---
@@ -804,14 +804,10 @@ context.
 **Entra ID (Microsoft Entra ID, formerly Azure Active Directory).**
 The Microsoft cloud identity and directory service.
 
-**GCC (Government Community Cloud).** The Microsoft 365 and Azure
-tenancy variant authorized at FedRAMP Moderate, targeting
-federal, state, and local government workloads.
-
-**GCC High (Government Community Cloud High).** The Microsoft 365
-and Azure tenancy variant authorized at FedRAMP High and aligned
-with IL5, targeting contractors handling CUI under DFARS
-252.204-7012.
+**GCC / GCC High.** Microsoft 365 government offerings, distinct from Azure
+cloud environments. The source-separated FedRAMP listing and vendor impact-
+level descriptions are maintained in `references/modern-it/productivity/microsoft-365-gcc.md`
+(reviewed 2026-10-29). Do not infer management-service authorization from these names.
 
 **GPO (Group Policy Object).** An Active Directory-delivered
 configuration policy container.

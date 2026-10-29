@@ -1,0 +1,32 @@
+id: modern-it-m365-source-conflict
+title: Reconcile GCC vendor and government descriptions without upgrading evidence
+category: modern-it
+prompt: |
+  I am updating our SSP cloud-provider table. Microsoft calls GCC FedRAMP High,
+  but the public FedRAMP MSO365MT record I saved says Class C (Moderate),
+  Agency path. Our spreadsheet calls GCC High MSO365MT, JAB P-ATO, IL5.
+  Can you correct the entries and tell us whether GCC is enough for our
+  non-export-controlled CUI? We have DFARS 252.204-7012 but haven't inventoried
+  all the Microsoft services yet.
+required_terms:
+  - MSO365MT
+  - FR1824057433
+  - contract
+  - service
+factual_claims_expected: true
+expected_recommendation: |
+  Read current Microsoft and government records and preserve differing claims
+  with URLs and dates. In the October 29 review, MSO365MT was GCC, Class C
+  (Moderate), Agency path; FR1824057433 was GCC High, Class D (High), Agency
+  path. Microsoft described GCC High-level support. Do not call the entire
+  GCC offering Moderate-only or promote vendor High support to a verified
+  High listing. Ask for the applicable package/ATO scope to resolve the gap.
+  GCC High vendor IL4 equivalency is not IL5 or a verified DISA PA.
+  Give conditional guidance pending contract/data-category, service/SKU,
+  feature, integration, boundary, and incident (c)-(g) evidence. Do not invent
+  SSP attestations or treat an empty DoD evidence list as proof of no PA.
+evaluator_notes: |
+  Accuracy 0 for selecting a tenancy without contract-specific and
+  service-specific authorization checks or for collapsing the source conflict.
+  An explicit limited/unverified status with concrete evidence requests is valid.
+  Accept newer primary evidence with dates; do not require frozen October values.

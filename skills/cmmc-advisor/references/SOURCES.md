@@ -420,3 +420,27 @@ other dated claims have not been revalidated by this update.
 All web sources were accessed during corpus development through April 2026. Compliance claims in the corpus carry dated verification stamps
 (typically "verified 2026-04-21") inline in the referenced files
 where the underlying authorization state is load-bearing.
+
+### Microsoft 365 GCC / GCC High reconciliation (2026-10-29)
+
+All sources below were accessed 2026-10-29. This targeted review verifies public
+listing fields and Microsoft descriptions, not restricted package contents,
+every feature, or independent DoD PAs. Used in the structured FedRAMP snapshot,
+Microsoft tenancy guide, productivity hub, endpoint and vendor cross-references,
+and evaluation cases. Preserve source differences rather than converting a
+vendor statement into government authorization evidence.
+
+- [FedRAMP Marketplace: Microsoft 365 Government Community Cloud & Supporting Services](https://www.fedramp.gov/marketplace/products/MSO365MT/): package MSO365MT; FedRAMP Certified; Rev5, Agency path, Class C (Moderate). This is GCC, not GCC High.
+- [FedRAMP Marketplace: Microsoft 365 Government Community Cloud-High](https://www.fedramp.gov/marketplace/products/FR1824057433/): package FR1824057433; FedRAMP Certified; Rev5, Agency path, Class D (High).
+- [Microsoft 365 Government how to buy](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/microsoft-365-government-how-to-buy): vendor commitments for GCC and GCC High, eligibility, and distinct SRG descriptions. GCC High support language does not resolve the GCC Marketplace profile difference.
+- [Microsoft cloud feature availability](https://learn.microsoft.com/en-us/azure/security/fundamentals/feature-availability): GCC support for FedRAMP High and identity pairings (GCC with Entra ID in Azure; GCC High/DoD with Entra ID in Azure Government).
+- [Office 365 GCC High and DoD service description](https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-platform-service-description/office-365-us-government/gcc-high-and-dod): GCC High IL4 equivalency/CMMC inheritance, Office 365 DoD IL5 and eligibility, production personnel screening, and customer-support accreditation exclusion.
+- [Microsoft FedRAMP overview](https://learn.microsoft.com/en-us/compliance/regulatory/offering-fedramp): separate GCC and GCC High package links, agency ATO descriptions, and in-scope service overview. Historical Commercial/Multi-Tenant naming is not proof of Commercial subscriber coverage.
+- [Microsoft cloud compliance comparison, May 2026 update](https://www.microsoft.com/en-us/microsoft-cloud/blog/us-government/2024/09/23/understanding-compliance-between-commercial-government-dod-secret-offerings-may-2026-update/): vendor explanation of GCC-only package scope, GCC SKU requirement, Commercial productivity exclusion, GCC DFARS flow-down support and CUI limitations, High equivalency framing, and split M365/Azure authorizations. Treat as vendor explanation, not a government authorization record.
+- [Azure, Dynamics 365, Microsoft 365, and Power Platform services compliance scope](https://learn.microsoft.com/en-us/azure/azure-government/compliance/azure-services-in-fedramp-auditscope): service/cloud-specific scope matrix; Azure authorization does not automatically transfer to M365 productivity or every bundled feature.
+- [DFARS 252.204-7012](https://www.acquisition.gov/dfars/252.204-7012-safeguarding-covered-defense-information-and-cyber-incident-reporting.): paragraphs (b)(1), (b)(2)(ii)(D), and (c)-(g); distinguishes on-behalf-of-Government systems from contractor systems and identifies external-CSP obligations.
+
+**Open evidence item:** Microsoft describes FedRAMP High support for GCC while
+the current public Marketplace profile shows Class C (Moderate). Obtain the
+relevant package/ATO and exact service scope before asserting High authorization.
+This review establishes neither an upgrade nor a downgrade of GCC.

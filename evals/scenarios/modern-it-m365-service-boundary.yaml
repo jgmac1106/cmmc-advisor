@@ -1,0 +1,31 @@
+id: modern-it-m365-service-boundary
+title: Bundled Microsoft security and support services require separate scope checks
+category: modern-it
+prompt: |
+  We bought Microsoft 365 GCC High E5. Can our SSP list Intune, Entra ID,
+  Defender, Purview, Power Automate, a new AI add-on, and customer support
+  under one GCC High authorization? A support engineer asked us to attach
+  a CUI file to a ticket. Our existing commercial tenant handles only HR
+  announcements, and leadership wants to move it all because we have 7012.
+required_terms:
+  - support
+  - contract
+  - service
+factual_claims_expected: true
+expected_recommendation: |
+  Inventory each exact SKU, service/feature, cloud, boundary, dependencies,
+  telemetry, connectors, and data paths. Check applicable M365 and Azure
+  packages, exclusions, and shared responsibilities separately. Licensing,
+  availability, and underlying Azure infrastructure do not prove authorization.
+  Verify current support terms: Microsoft's GCC High/DoD description excludes
+  ordinary support from the accreditation boundary. Sanitize tickets and
+  establish an approved channel and recipient authorization for controlled data.
+  Read actual contract/flow-down requirements, CUI category/export controls,
+  and incident obligations before a tenancy decision. Do not require migration
+  of genuinely non-CUI commercial workflows solely from the presence of 7012.
+evaluator_notes: |
+  Accuracy 0 for blanket suite inheritance, treating support as automatically
+  covered, or skipping contract-specific/service-specific checks. Require
+  current primary sources and dates or an explicit unverified status with a
+  concrete evidence-gathering path. Do not certify the whole organization
+  merely because its CSP has an authorization.

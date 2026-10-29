@@ -11,6 +11,10 @@
 > against the vendor's public compliance page or a linked FedRAMP
 > Marketplace package entry.
 
+> Microsoft cross-references reconciled 2026-10-29. For primary sources and
+> required contract/service checks, see `modern-it/productivity/microsoft-365-gcc.md`.
+> Other vendor examples retain their historical verification dates.
+
 ## Overview
 
 This file is the practitioner guide to searching the FedRAMP
@@ -181,8 +185,8 @@ messaging for cross-organization CUI-containing communications.
 
 **Representative vendors.**
 
-- Microsoft Defender for Office 365 (bundled with M365 GCC High;
-  inherits GCC High FedRAMP High + IL5 authorization).
+- Microsoft Defender for Office 365. Verify the exact feature and cloud
+  against the applicable package; an M365 bundle does not confer IL5.
 - Google Workspace native security (Gmail spam/phishing
   protection inherits Workspace Assured Controls Plus
   FedRAMP High authorization).
@@ -255,8 +259,8 @@ deployed on CUI-adjacent endpoints.
 
 **Representative vendors.**
 
-- Microsoft Defender for Endpoint. Bundled with M365 GCC High
-  and Azure Government; inherits FedRAMP High + IL5.
+- Microsoft Defender for Endpoint. Check its service-specific cloud and
+  authorization scope separately from the M365 productivity package.
 - CrowdStrike Falcon. FedRAMP authorization per CrowdStrike
   government trust documentation; verify current package scope
   (FedRAMP Moderate and High variants exist for different
@@ -303,8 +307,8 @@ identity governance.
 
 **Representative vendors.**
 
-- Microsoft Entra ID Government. Bundled with Azure Government
-  and M365 GCC High; FedRAMP High + IL5.
+- Microsoft Entra ID Government. Verify the applicable Azure authorization
+  scope; do not transfer it to the M365 GCC High productivity boundary.
 - Google Cloud Identity (Workspace ACP). Inherits Workspace
   Assured Controls Plus authorization.
 - Okta for US Government. FedRAMP Moderate and High variants
@@ -333,8 +337,8 @@ labeling; data governance for CUI-marked content.
 
 **Representative vendors.**
 
-- Microsoft Purview. Bundled with M365 GCC High; inherits GCC
-  High authorization.
+- Microsoft Purview. Verify the particular capability, cloud, and package
+  boundary; the product name spans multiple services.
 - Google Workspace DLP / Drive DLP. Inherits Workspace ACP
   authorization.
 - Proofpoint DLP. FedRAMP authorization via Proofpoint for

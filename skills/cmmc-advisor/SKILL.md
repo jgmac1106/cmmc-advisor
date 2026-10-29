@@ -117,6 +117,15 @@ If the audience is unclear, ask before assuming.
    changes. When citing a product's FedRAMP status, note the verification
    date and recommend the user confirm current status at fedramp.gov.
 
+For Microsoft 365 tenancy or authorization questions, read both
+`references/modern-it/productivity/microsoft-365-gcc.md` and
+`references/data/fedramp-snapshot.json`. Keep vendor descriptions, government
+listing observations, and DoD impact-level equivalency separate. Require
+contract-specific and service-specific authorization checks, including CUI
+category, exact SKU/feature/boundary, incident obligations, and export controls.
+Preserve conflicting evidence and mark unresolved claims unverified. Do not
+infer a DoD PA from FedRAMP or a suite-wide authorization from a bundled license.
+
 ## Contractor-Aware Guidance
 
 Different organizations face different realities. Adapt your guidance:

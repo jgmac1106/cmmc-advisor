@@ -2,7 +2,7 @@
 
 Scores the cmmc-advisor skill's response to a scenario on five categories. Each category is scored 0, 1, 2, or 3 against the anchors below. Weighted mean must be at least 2.0 to pass. Category A (Accuracy) hard-fails the whole response at score 0 regardless of the other scores.
 
-The evaluator is a second Claude call that receives the scenario, the full subject response, and this rubric.
+The evaluator is a second OpenAI Responses call that receives the scenario, the full subject response, and this rubric.
 
 ## Category A: Accuracy (weight 2.0, hard-fail at 0)
 
@@ -14,6 +14,30 @@ Factual correctness on CMMC level requirements, assessment rules, control text, 
 | 2 | Level recommendation is correct. Minor factual slips on supporting details (e.g., off-by-one practice count, wrong specific paragraph of DFARS 252.204-7012) but nothing load-bearing. |
 | 1 | Level recommendation directionally correct but based on flawed reasoning. Or level correct but assessment-path recommendation wrong. |
 | 0 | Level recommendation wrong. Invented controls or assessments. Hallucinated citations. Hard-fail. |
+
+### Microsoft tenancy and authorization checks
+
+For Microsoft tenancy scenarios, score Accuracy 0 for a load-bearing obsolete
+blanket classification (GCC Moderate-only, GCC High IL5, GCC High JAB P-ATO,
+or MSO365MT assigned to GCC High), a vendor equivalency promoted to a government
+PA, or a bundled license treated as authorization for every service. Also score
+0 for a tenancy recommendation that omits contract-specific discovery or
+service-specific authorization checks. A generic "verify compliance" footer
+does not satisfy these checks.
+
+Require CUI/data-flow and export-control discovery, actual clauses/flow-downs,
+incident obligations where applicable, and exact service/cloud/feature/boundary
+checks. For source discrepancies, preserve each source's description and date,
+identify the unresolved claim, and specify the missing package/ATO evidence.
+Use current primary sources if the records change; dated scenario observations
+are regression anchors, not permanent classifications. Reward an explicit
+unverified status and actionable path when current evidence cannot be obtained.
+
+`m365_classification_candidates` is a lexical warning only. A quoted, rejected,
+or historically attributed claim is not an affirmative error. Conversely,
+absence of a regex hit is not evidence of accuracy. Judge tables and paraphrases
+as well as prose. A contractually supported GCC option must not be excluded
+just because of its name; an IL5 requirement must not automatically select GCC High.
 
 ## Category B: CUI Scoping (weight 1.5)
 

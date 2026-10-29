@@ -41,15 +41,10 @@ FedRAMP Moderate equivalence requirement; see
 `references/fedramp-gap.md` "The CUI Baseline Decision" for the
 clause text and the full equivalence mechanics.
 
-**Pending per-provider files.** The three per-provider slices
-(`aws-govcloud.md`, `azure-government.md`, `gcp-assured.md`)
-are authored incrementally under Phase 5c. Until those files
-land, a reader asking a provider-specific question (for
-example, "does GCC Moderate or GCC High apply to my Azure CUI
-workload?") should anchor to this hub's FedRAMP-to-IL crosswalk
-and the four conventions, then consult the provider's own
-compliance documentation directly. Slice N will replace this
-banner once the per-provider files are complete.
+**Provider routing.** For Azure infrastructure, read `azure-government.md`.
+For GCC versus GCC High productivity, read
+`references/modern-it/productivity/microsoft-365-gcc.md`. Microsoft 365 tenancy
+names are not Azure region classifications; verify each service separately.
 
 **fedramp-gap.md version-reconciliation note.** This file
 reflects CSP SRG v1r1 framing (verified 2026-04-21). The
@@ -460,10 +455,12 @@ documentation pattern.
 1. **Is CUI present in this workload?** If no, FedRAMP Moderate
    equivalence under DFARS 7012 is not triggered; commercial
    tenancies are available. If yes, continue.
-2. **Which CC SRG Impact Level applies?** IL2 (non-CUI federal
-   data; no 7012 trigger), IL4 (standard CUI under 7012), IL5
-   (mission-critical CUI or NSS data), or IL6 (classified; out
-   of scope for CMMC L2). If IL4 or IL5, continue.
+2. **Does a DoD Impact Level requirement apply?** Check the contract and
+   mission-owner conditions; 7012 or CUI alone does not prescribe IL4/IL5.
+   If an IL is required, obtain the exact service's current DoD authorization
+   and applicable conditions, separately from its FedRAMP evidence. See
+   `references/modern-it/productivity/microsoft-365-gcc.md` for the dated
+   Microsoft reconciliation and DFARS source.
 3. **Is ITAR or EAR export-controlled data present?** If yes,
    the provider tenancy must be verified-US-person-operator and
    located in US geographic boundaries. This narrows the
