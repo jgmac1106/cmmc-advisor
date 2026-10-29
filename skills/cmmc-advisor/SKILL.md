@@ -42,7 +42,7 @@ Do not answer from memory alone when a reference exists. Consult
 | CUI vs FCI, boundary definition, enclaves | `references/scoping-and-cui.md` |
 | System Security Plan structure or gaps | `references/ssp-guidance.md` |
 | POA&M rules, 180-day closeout, critical items | `references/poam-management.md` |
-| Build/update objective-level traceability matrix, evidence inventory, or change-impact report | `references/traceability-matrix.md` |\n| What evidence to collect | `references/evidence-collection.md` |
+| Build/update objective-level traceability matrix, evidence inventory, or change-impact report | `references/traceability-matrix.md` |\n| Export machine-readable traceability, SSP, assessment evidence or POA&M as OSCAL JSON for 800-171 Rev. 2 | `references/oscal-rev2-interoperability.md` |\n| What evidence to collect | `references/evidence-collection.md` |
 | NIST 800-171 Rev 3 transition timeline | `references/rev3-transition.md` |
 | FedRAMP vs CMMC, 7012 CSP requirements | `references/fedramp-gap.md` |
 | Common mistakes, compliance theater | `references/anti-patterns.md` |
