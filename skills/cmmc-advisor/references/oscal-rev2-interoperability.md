@@ -40,5 +40,9 @@ Keep a separate objective mapping when source catalogs lack the objective text; 
 ## Example metadata rule
 For a control linked in an SSP, use `implemented-requirements[].control-id = "3.8.1"` only when the imported Rev. 2 profile/catalog actually contains that control. Associate `3.8.1[a]` through a reviewed objective crosswalk and appropriately named property/link or assessment planning structure; do not invent `objective-id` fields unsupported by OSCAL schema.
 
+## Machine-readable companion schema
+
+The repository includes `schemas/rev2-objective-crosswalk.schema.json` (JSON Schema Draft 2020-12) for validating the **companion objective crosswalk only**. Its `objective_id` maps to `control_id`; evidence may refer to native OSCAL `back-matter.resources` UUIDs. A valid crosswalk is **not** proof that an accompanying OSCAL document passes its official OSCAL schema; run both validations. Use a local reviewed catalog URI and source provenance; no source catalog is bundled or implicitly NIST-approved.
+
 ## Client isolation
 Never upload actual customer SSPs, CUI content, assessment evidence, architecture details or personal information to this public repository. Only generalized schemas, workflows, templates and clearly synthetic examples belong here.
