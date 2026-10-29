@@ -27,7 +27,7 @@ Rev 3 transition context (current Rev 2 requirements with Rev 3 awareness).
 
 Anti-patterns catalog: sixteen named compliance-theater patterns across documentation, tool, scope, and assessment categories.
 
-## Installation
+## OSCAL JSON interoperability\n\nThe traceability workflow includes OSCAL JSON guidance for NIST SP 800-171 Revision 2. It maps canonical SSP implementations, assessment plans, evidence observations/results, and POA&M content into native OSCAL models while keeping a reviewed objective-level crosswalk. The current NIST `oscal-content` tree provides an SP 800-171 Rev. 3 catalog; a separately verified Rev. 2 catalog must be pinned and reviewed, not silently replaced with Rev. 3. JSON must pass a pinned OSCAL schema before any schema-valid claim. Do not publish client CUI or evidence to this public repository. See [OSCAL Rev. 2 interoperability](skills/cmmc-advisor/references/oscal-rev2-interoperability.md).\n\n## Installation
 
 This repository is a skills-only OpenAI plugin. The portable manifest is `plugin.json`; the complete skill, including its references and license, is under `skills/cmmc-advisor/`. There is no MCP server or credential requirement.
 
