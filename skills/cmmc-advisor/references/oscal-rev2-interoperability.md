@@ -11,6 +11,24 @@ NIST OSCAL source repositories:
 
 **Availability caveat:** As reviewed 2026-10-29, the current `oscal-content/nist.gov/SP800-171/` tree exposes `rev3`, not `rev2`. Do **not** import a Rev. 3 catalog or relabel it as Rev. 2. Obtain a separately reviewed faithful Rev. 2 catalog from an authoritative Rev. 2 source, or build a local Rev. 2 catalog with recorded provenance and review; never claim it was published by NIST unless verified. Track a pinned URI/commit, SHA-256 digest and publication/revision metadata for the chosen catalog, plus a separately sourced Rev. 2 assessment-objective mapping. Do not invent official assessment objective identifiers or assume the OSCAL catalog automatically includes every 800-171A objective.
 
+## Reviewed third-party Rev. 2 OSCAL candidate (2026-10-29)
+The public [khanssen/oscal-nist-800-171r2](https://github.com/khanssen/oscal-nist-800-171r2) repository (Archstone Security LLC, K. Stanford, release version `2.0-combined.1`) provides:
+- Catalog: `catalog/nist-sp-800-171r2-combined-catalog.json` (OSCAL 1.1.2). Its documentation states 14 groups, 110 Rev. 2 requirements, 320 SP 800-171A objective parts, and 110 assessment procedures. These are **publisher claims** until independently checked against the official NIST source, pinned release and schema.
+- Profile: `nist-sp-800-171r2-profile.json`, importing all 110 controls from that catalog. For an SSP importing the profile, use this pinned local/profile reference; do not substitute a Rev. 3 profile.
+- Provenance and verification: `README.md`, `DIFFERENCES.md`, `CORRECTIONS.md`, `scripts/validate.py`, GitHub release attestation and release `SHA256SUMS`. Verify the specific release asset and attestation with `gh attestation verify <file> --owner khanssen`, compare its SHA-256, run the published validator, and spot-check requirement/objective text against NIST Rev. 2 and 800-171A. A successful attestation proves artifact provenance, **not** content correctness.
+- Licensing: the combined curation/OSCAL structure is offered under **CC BY 4.0**, with attribution to "NIST SP 800-171 Rev 2 Combined OSCAL Catalog, Archstone Security LLC, https://github.com/khanssen/oscal-nist-800-171r2". Respect license and attribution if redistributing or adapting. Do not imply NIST endorsed the third-party rendering.
+
+**Review caveat:** At inspection, the upstream README contains unresolved Git merge conflict markers in its objective documentation (`a` through `o` versus `a` through `n`). Do not rely on that README sentence to enumerate objective parts. Read the catalog itself and run the 320-objective count/letter-sequence checks. These files are **a candidate source**, not automatically verified or bundled as an authoritative baseline.
+
+### Exact ID crosswalk required for this catalog
+The catalog uses OSCAL token-safe control `id` values such as `_03.08.01` and objective part IDs such as `_03.08.01_obj.a`; its `label` property is the familiar `3.8.1` and the human assessment objective is `3.8.1[a]`. Record all of:
+- `control_id = "3.8.1"` (human NIST number);
+- `oscal_control_id = "_03.08.01"` (actual OSCAL `control.id` and imported SSP `control-id`);
+- `objective_id = "3.8.1[a]"` (human objective);
+- `oscal_objective_part_id = "_03.08.01_obj.a"` (actual catalog `part.id`).
+
+Do not import `3.8.1` into an OSCAL SSP's `implemented-requirements[].control-id` when using this third-party catalog: the resolvable value is `_03.08.01`. Resolve IDs from the catalog's `label` props and `parts`; never generate IDs by padding without checking against the pinned actual catalog. The source `assessment` parts hold EXAMINE/INTERVIEW/TEST procedures, while objective parts hold the individual determinations.
+
 ## OSCAL document crosswalk
 | Use case | OSCAL model / native assemblies |
 | --- | --- |
@@ -38,11 +56,11 @@ Keep a separate objective mapping when source catalogs lack the objective text; 
 7. Separate three labels: `OSCAL-schema-valid` (syntax/structure tested), `Rev2-content-reviewed` (source fidelity verified), and `assessment-verified` (human evidence/implementation assessment). One does not imply another.
 
 ## Example metadata rule
-For a control linked in an SSP, use `implemented-requirements[].control-id = "3.8.1"` only when the imported Rev. 2 profile/catalog actually contains that control. Associate `3.8.1[a]` through a reviewed objective crosswalk and appropriately named property/link or assessment planning structure; do not invent `objective-id` fields unsupported by OSCAL schema.
+For a control linked in an SSP, set `implemented-requirements[].control-id` to the **actual imported catalog control ID**. With the Archstone catalog above, use `"_03.08.01"` for requirement 3.8.1, not `"3.8.1"`. Associate `3.8.1[a]` through a reviewed objective crosswalk and appropriately named property/link or assessment planning structure; do not invent `objective-id` fields unsupported by OSCAL schema.
 
 ## Machine-readable companion schema
 
-The repository includes `schemas/rev2-objective-crosswalk.schema.json` (JSON Schema Draft 2020-12) for validating the **companion objective crosswalk only**. Its `objective_id` maps to `control_id`; evidence may refer to native OSCAL `back-matter.resources` UUIDs. A valid crosswalk is **not** proof that an accompanying OSCAL document passes its official OSCAL schema; run both validations. Use a local reviewed catalog URI and source provenance; no source catalog is bundled or implicitly NIST-approved.
+The repository includes `schemas/rev2-objective-crosswalk.schema.json` (JSON Schema Draft 2020-12) for validating the **companion objective crosswalk only**. Its `objective_id` maps to `control_id`; evidence may refer to native OSCAL `back-matter.resources` UUIDs. A valid crosswalk is **not** proof that an accompanying OSCAL document passes its official OSCAL schema; run both validations. Use a locally pinned, independently reviewed catalog URI and source provenance; the third-party catalog is a documented candidate, not bundled or implicitly NIST-approved.
 
 ## Client isolation
 Never upload actual customer SSPs, CUI content, assessment evidence, architecture details or personal information to this public repository. Only generalized schemas, workflows, templates and clearly synthetic examples belong here.
