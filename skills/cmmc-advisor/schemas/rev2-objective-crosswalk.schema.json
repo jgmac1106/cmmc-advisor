@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jgmac1106/cmmc-advisor/blob/main/skills/cmmc-advisor/schemas/rev2-objective-crosswalk.schema.json",
+  "title": "CMMC Level 2 / NIST SP 800-171 Rev. 2 objective crosswalk (OSCAL companion)",
+  "description": "Companion mapping data, NOT an OSCAL model. OSCAL SSP, AP, AR and POAM payloads must independently validate against pinned official OSCAL JSON schemas. This maps assessment objectives to their governing Rev. 2 controls, OSCAL document/resource identifiers, and review metadata.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "baseline",
+    "catalog",
+    "objectives"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publication",
+        "revision",
+        "assessment_source"
+      ],
+      "properties": {
+        "publication": {
+          "const": "NIST SP 800-171"
+        },
+        "revision": {
+          "const": "2"
+        },
+        "assessment_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assessment_source_version": {
+          "type": "string"
+        },
+        "assessment_source_uri": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uri",
+        "source",
+        "source_revision_reviewed"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "source_revision_reviewed": {
+          "type": "boolean"
+        },
+        "pinned_commit": {
+          "type": "string"
+        }
+      }
+    },
+    "objectives": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/objective"
+      }
+    }
+  },
+  "$defs": {
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objective_id",
+        "control_id",
+        "objective_text",
+        "objective_source",
+        "evidence",
+        "review_status"
+      ],
+      "properties": {
+        "objective_id": {
+          "type": "string",
+          "pattern": "^3\\.[0-9]+\\.[0-9]+\\[[a-z]+\\]$"
+        },
+        "control_id": {
+          "type": "string",
+          "pattern": "^3\\.[0-9]+\\.[0-9]+$"
+        },
+        "cmmc_practice_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objective_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objective_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assessment_methods": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "EXAMINE",
+              "INTERVIEW",
+              "TEST"
+            ]
+          }
+        },
+        "ssp_document_uuid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "ssp_implementation_control_id": {
+          "type": "string"
+        },
+        "ssp_statement_locator": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "documentary_support": {
+          "enum": [
+            "supported",
+            "partial",
+            "unsupported",
+            "pending"
+          ]
+        },
+        "operational_support": {
+          "enum": [
+            "supported",
+            "partial",
+            "unsupported",
+            "pending"
+          ]
+        },
+        "review_status": {
+          "enum": [
+            "unreviewed",
+            "reviewed",
+            "needs-update"
+          ]
+        },
+        "reviewer": {
+          "type": "string"
+        },
+        "reviewed_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "location"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location": {
+          "type": "string",
+          "description": "Authorized secure locator; avoid embedding CUI."
+        },
+        "oscal_resource_uuid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "source_document_version": {
+          "type": "string"
+        },
+        "section": {
+          "type": "string"
+        },
+        "collected_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "owner": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
