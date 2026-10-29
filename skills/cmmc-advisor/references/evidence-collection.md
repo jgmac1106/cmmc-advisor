@@ -335,3 +335,8 @@ no one can find it quickly.
 
 **Fix:** Build and maintain the evidence index. The five minutes it takes
 to log each piece of evidence saves hours during assessment week.
+
+
+## Objective-level traceability
+
+For construction, validation, or maintenance of an objective-level evidence matrix, follow `traceability-matrix.md`. Assign stable evidence IDs, record document versions and exact sections, source system, owner, secure locator, collection date, covered period, sensitivity, and refresh trigger. One artifact can support multiple objective IDs. Track documentary sufficiency separately from operational proof; never promote a documentary mapping to an assessment determination without validation.
