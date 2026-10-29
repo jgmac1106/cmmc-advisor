@@ -171,6 +171,20 @@
         },
         "notes": {
           "type": "string"
+        },
+        "oscal_control_id": {
+          "type": "string",
+          "pattern": "^_[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}$",
+          "description": "Actual OSCAL control.id from imported catalog, e.g. _03.08.01; verify against pinned catalog."
+        },
+        "oscal_objective_part_id": {
+          "type": "string",
+          "pattern": "^_[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}_obj\\.[a-z]+$",
+          "description": "Actual OSCAL objective part.id from imported catalog; verify its presence and text."
+        },
+        "catalog_profile_uri": {
+          "type": "string",
+          "format": "uri"
         }
       }
     },
